@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="xqMing"><meta name="description" content="MongoDB最近几年，以其独特的性能优势，及独特的文档型数据结构，占有了大部分Nosql市场，因此，熟悉掌握MongoDB的使用，对于开发者显得十分必要。"><meta name="keywords" content="MongoDB"><title>MongoDB 笔记 · xqMing</title><link rel="icon" href="/favicon.ico"><link rel="canonical" href="http://yoursite.com/2016/06/30/MongoDB-笔记/"><link rel="alternate" href="/atom.xml" title="xqMing"><link rel="stylesheet" href="/fonts/iconfont/iconfont.css"><link rel="stylesheet" href="/css/style.css"></head><body><div id="main"><header><a href="/." class="logo">xqMing</a><ul class="nav"><li class="nav-link"><a href="/" target="_self">Home</a></li><li class="nav-link"><a href="/archives/" target="_self">Archives</a></li><li class="nav-link"><a href="/tags/" target="_self">Tags</a></li><li class="nav-link"><a href="/about/" target="_self">About</a></li></ul></header><section id="container"><article class="post"><h1 class="post-title">MongoDB 笔记</h1><span class="post-time">Jun 30, 2016</span><div id="sidebar" class="post-sidebar"><h3 class="heading">Contents</h3><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MongoDB-的安装"><span class="toc-text">MongoDB 的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MongoDB-的数据结构以及底层"><span class="toc-text">MongoDB 的数据结构以及底层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MongoDB-的业务场景"><span class="toc-text">MongoDB 的业务场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MongoDB-常用命令"><span class="toc-text">MongoDB 常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查询"><span class="toc-text">查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#索引相关"><span class="toc-text">索引相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加"><span class="toc-text">添加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改"><span class="toc-text">修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除"><span class="toc-text">删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查询修改删除"><span class="toc-text">查询修改删除</span></a></li></ol></li></ol></div><div class="post-content"><p>MongoDB 最近几年，以其独特的性能优势，及独特的文档型数据结构，占有了大部分 Nosql 市场，因此，熟悉掌握 MongoDB 的使用，对于开发者显得十分必要。</p>
+<a id="more"></a>
+<h2 id="MongoDB-的安装"><a href="#MongoDB-的安装" class="headerlink" title="MongoDB 的安装"></a>MongoDB 的安装</h2><ul>
+<li><p>windows 下安装，<a href="http://www.runoob.com/mongodb/mongodb-window-install.html" target="_blank" rel="external">参见此教程</a></p>
+</li>
+<li><p>将其添加到系统服务，在 cmd 系统管理员模式下运行下面命令(路径按实际情况改动)</p>
+</li>
+</ul>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">mongod.</span><span class="string">exe </span> <span class="built_in">--logpath</span> <span class="string">"C:\Program Files\MongoDB\data\log\mongo.log"</span> <span class="built_in">--logappend</span> <span class="built_in">--dbpath</span> <span class="string">"C:\Program Files\MongoDB\data\db"</span> <span class="built_in">--port</span> <span class="string">27017 </span><span class="built_in">--serviceName</span> <span class="string">"mongodb"</span> <span class="built_in">--serviceDisplayName</span> <span class="string">"mongodb"</span> <span class="built_in">--install</span></div></pre></td></tr></table></figure>
+<ul>
+<li>设置开机自启动</li>
+</ul>
+<p>cmd 下运行services.msc 找到mongo 后设置自动启动</p>
+<ul>
+<li>连接远程的mongo</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">mongo</span> <span class="number">192.168.111.200:27017</span>/mdoctor -u mdoctor -p password</div></pre></td></tr></table></figure>
+<h2 id="MongoDB-的数据结构以及底层"><a href="#MongoDB-的数据结构以及底层" class="headerlink" title="MongoDB 的数据结构以及底层"></a>MongoDB 的数据结构以及底层</h2><p>存储格式：面向集合存储，一个collection 相当于mysql中的一个table，底层文件存储格式为BSON（一种JSON的扩展），Binary JSON </p>
+<h2 id="MongoDB-的业务场景"><a href="#MongoDB-的业务场景" class="headerlink" title="MongoDB 的业务场景"></a>MongoDB 的业务场景</h2><p> mongodb的主要目标是在键/值存储方式（提供了高性能和高度伸缩性）以及传统的RDBMS系统（丰富的功能）架起一座桥梁，集两者的优势于一身。mongo适用于以下场景：</p>
+<ul>
+<li><p>网站数据：mongo非常适合实时的插入，更新与查询，并具备网站实时数据存储所需的复制及高度伸缩性。</p>
+</li>
+<li><p>缓存：由于性能很高，mongo也适合作为信息基础设施的缓存层。在系统重启之后，由mongo搭建的持久化缓存可以避免下层的数据源过载。</p>
+</li>
+<li><p>大尺寸、低价值的数据，比如评论、回复、模板数据。使用传统的关系数据库存储一些数据时可能会比较贵，在此之前，很多程序员往往会选择传统的文件进行存储。</p>
+</li>
+<li><p>高伸缩性的场景：mongo非常适合由数十或者数百台服务器组成的数据库。</p>
+</li>
+<li><p>用于对象及JSON数据的存储：mongo的BSON数据格式非常适合文档格式化的存储及查询。</p>
+</li>
+</ul>
+<p>不适合的场景：</p>
+<ul>
+<li>高度事物性的系统：例如银行或会计系统。传统的关系型数据库目前还是更适用于需要大量原子性复杂事务的应用程序</li>
+</ul>
+<h2 id="MongoDB-常用命令"><a href="#MongoDB-常用命令" class="headerlink" title="MongoDB 常用命令"></a>MongoDB 常用命令</h2><ul>
+<li><p>查看数据库：show databases;</p>
+</li>
+<li><p>使用数据库：use db_name;</p>
+</li>
+<li><p>查看有哪些表，或者是集合：show collections|show table;</p>
+</li>
+<li><p>查看集合，返回的是一个数组：db.getCollections();</p>
+</li>
+<li><p>创建集合，db.createCollection(“nsmr”，”一些可选参数,可以不填”)</p>
+</li>
+<li><p>在集合中插入数据 db.sites.insert({name:”itbilu.com”})</p>
+</li>
+<li><p>重新命名集合类 db.COLLECTION_NAME.renameCollection(“NEW_NAME”)</p>
+</li>
+<li><p>删除集合类 db.COLLECTION_NAME.drop();</p>
+</li>
+<li><p>查询当前集合的数据条数：db.yourColl.count();</p>
+</li>
+<li><p>查看数据空间大小:db.userInfo.dataSize();</p>
+</li>
+<li><p>得到当前聚集集合所在的数据库:db.userInfo.getDB();</p>
+</li>
+<li><p>得到当前聚集的状态，可以查看到当前collection 的size、count啥的：db.userInfo.stats();</p>
+</li>
+<li><p>得到聚集集合总大小：db.userInfo.totalSize();</p>
+</li>
+<li><p>collection重命名：db.userInfo.renameCollection(“users”);</p>
+</li>
+<li><p>删除当前collection：db.userInfo.drop();</p>
+</li>
+</ul>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><ul>
+<li><p>查询所有记录：db.userInfo.find();<br>相当于：select * from userInfo;</p>
+</li>
+<li><p>查询去掉后的当前聚集集合中的某列的重复数据：db.userInfo.distinct(“name”);<br>相当于：select distict name from userInfo;</p>
+</li>
+<li><p>查询age = 22的记录：db.userInfo.find({“age”: 22});<br>相当于： select * from userInfo where age = 22;</p>
+</li>
+<li><p>查询age &gt; 22的记录<br>db.userInfo.find({age: {$gt: 22}});<br>相当于：select * from userInfo where age &gt; 22;</p>
+</li>
+<li><p>查询age &lt; 22的记录<br>db.userInfo.find({age: {$lt: 22}});<br>相当于：select * from userInfo where age &lt; 22;</p>
+</li>
+<li><p>查询age &gt;= 25的记录<br>db.userInfo.find({age: {$gte: 25}});<br>相当于：select * from userInfo where age &gt;= 25;</p>
+</li>
+<li><p>查询age &lt;= 25的记录<br>db.userInfo.find({age: {$lte: 25}});</p>
+</li>
+<li><p>查询age &gt;= 23 并且 age &lt;= 26<br>db.userInfo.find({age: {$gte: 23, $lte: 26}});</p>
+</li>
+<li><p>查询name中包含 mongo的数据<br>db.userInfo.find({name: /mongo/});<br>select * from userInfo where name like ‘%mongo%’;</p>
+</li>
+<li><p>查询name中以mongo开头的<br>db.userInfo.find({name: /^mongo/});<br>select * from userInfo where name like ‘mongo%’;</p>
+</li>
+<li><p>查询之正则<br>db.userInfo..find({name:{$regex:/aaa/}})</p>
+</li>
+<li><p>查询指定列name、age数据<br>db.userInfo.find({}, {name: 1, age: 1});<br>相当于：select name, age from userInfo;<br>当然name也可以用true或false,当用ture的情况下河name:1效果一样，如果用false就是排除name，显示name以外的列信息。</p>
+</li>
+<li><p>查询指定列name、age数据, age &gt; 25<br>db.userInfo.find({age: {$gt: 25}}, {name: 1, age: 1});<br>相当于：select name, age from userInfo where age &gt; 25;</p>
+</li>
+<li><p>按照年龄排序<br>升序：db.userInfo.find().sort({age: 1});<br>降序：db.userInfo.find().sort({age: -1});</p>
+</li>
+<li><p>查询name = zhangsan, age = 22的数据<br>db.userInfo.find({name: ‘zhangsan’, age: 22});<br>相当于：select * from userInfo where name = ‘zhangsan’ and age = ‘22’;</p>
+</li>
+<li><p>查询前5条数据<br>db.userInfo.find().limit(5);<br>相当于：select top 5 * from userInfo;</p>
+</li>
+<li><p>查询10条以后的数据<br>db.userInfo.find().skip(10);</p>
+</li>
+<li><p>查询在5-10之间的数据<br>db.userInfo.find().limit(10).skip(5);<br>可用于分页，limit是pageSize，skip是第几页*pageSize</p>
+</li>
+<li><p>or与 查询<br>db.userInfo.find({$or: [{age: 22}, {age: 25}]});<br>相当于：select * from userInfo where age = 22 or age = 25;</p>
+</li>
+</ul>
+<ul>
+<li><p>in 查询<br>db.userInfo.find({_id:({$in:[20368,20369]})})</p>
+</li>
+<li><p>查询第一条数据<br>db.userInfo.findOne();<br>相当于：select top 1 * from userInfo;<br>db.userInfo.find().limit(1);</p>
+</li>
+<li><p>查询某个结果集的记录条数<br>db.userInfo.find({age: {$gte: 25}}).count();<br>相当于：select count(*) from userInfo where age &gt;= 20;</p>
+</li>
+<li><p>按照某列进行排序<br>db.userInfo.find({sex: {$exists: true}}).count();<br>相当于：select count(sex) from userInfo;</p>
+</li>
+</ul>
+<h3 id="索引相关"><a href="#索引相关" class="headerlink" title="索引相关"></a>索引相关</h3><p>db.userInfo.ensureIndex({name: 1});<br>db.userInfo.ensureIndex({name: 1, ts: -1});</p>
+<p>2、查询当前聚集集合所有索引<br>db.userInfo.getIndexes();</p>
+<p>3、查看总索引记录大小<br>db.userInfo.totalIndexSize();</p>
+<p>4、读取当前集合的所有index信息<br>db.users.reIndex();</p>
+<p>5、删除指定索引<br>db.users.dropIndex(“name_1”);</p>
+<p>6、删除所有索引索引<br>db.users.dropIndexes();</p>
+<h3 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h3><p>db.users.save({name: ‘zhangsan’, age: 25, sex: true});<br>添加的数据的数据列，没有固定，根据添加的数据为准</p>
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><p>db.users.update({age: 25}, {$set: {name: ‘changeName’}}, false, true);<br>相当于：update users set name = ‘changeName’ where age = 25;</p>
+<p>db.users.update({name: ‘Lisi’}, {$inc: {age: 50}}, false, true);<br>相当于：update users set age = age + 50 where name = ‘Lisi’;</p>
+<p>db.users.update({name: ‘Lisi’}, {$inc: {age: 50}, $set: {name: ‘hoho’}}, false, true);<br>相当于：update users set age = age + 50, name = ‘hoho’ where name = ‘Lisi’;</p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>db.users.remove({age: 132});</p>
+<h3 id="查询修改删除"><a href="#查询修改删除" class="headerlink" title="查询修改删除"></a>查询修改删除</h3><p>db.users.findAndModify({<br>    query: {age: {$gte: 25}},<br>    sort: {age: -1},<br>    update: {$set: {name: ‘a2’}, $inc: {age: 2}},<br>    remove: true<br>});</p>
+<p>db.runCommand({ findandmodify : “users”,<br>    query: {age: {$gte: 25}},<br>    sort: {age: -1},<br>    update: {$set: {name: ‘a2’}, $inc: {age: 2}},<br>    remove: true<br>});<br>update 或 remove 其中一个是必须的参数; 其他参数可选。</p>
+</div></article><div class="tags"><a href="/tags/MongoDB/">MongoDB</a></div><div class="paginator"><a href="/2016/07/07/JHispter实践/" class="prev"><i class="iconfont icon-left"></i><span> Prev</span></a><a href="/2016/06/29/Java8-新特性学习/" class="next"><span>Next</span><i class="iconfont icon-right"></i></a></div><section id="comments"><div data-thread-key="http://yoursite.com/2016/06/30/MongoDB-笔记/index.html" data-title="MongoDB 笔记" data-url="http://yoursite.com/2016/06/30/MongoDB-笔记/index.html" class="ds-thread"></div><script type="text/javascript">var duoshuoQuery = {short_name: "xqming" };
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();</script></section></section><footer><div class="copyright"><p class="power">Powered by <a href="https://hexo.io/">Hexo</a> and Theme by <a href="https://github.com/ahonn/hexo-theme-even"> Even</a></p><p class="since">&copy;2016<span class="heart"><i class="iconfont icon-heart"></i></span><span class="author">xqMing</span></p></div><label id="back2top"><i class="iconfont icon-up"></i></label></footer></div><script src="/js/zepto.min.js"></script><script src="/js/theme.js"></script></body></html>

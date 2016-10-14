@@ -1,0 +1,1267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>xqMing</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2016-10-13T09:35:15.076Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>xqMing</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux Minit 18 折腾记</title>
+    <link href="http://yoursite.com/2016/10/13/Linux-Minit-18-%E6%8A%98%E8%85%BE%E8%AE%B0/"/>
+    <id>http://yoursite.com/2016/10/13/Linux-Minit-18-折腾记/</id>
+    <published>2016-10-13T08:12:59.000Z</published>
+    <updated>2016-10-13T09:35:15.076Z</updated>
+    
+    <content type="html"><![CDATA[<p>一直记得一位老司机的话，永远不要放弃 Linux。于是乎，最近又花了些时间折腾 Linux ，在自己家的台式机上面安装了 Linux Minit 18，以下记录我在 Linux 中安装各种软件命令。</p>
+<a id="more"></a>
+<h2 id="安装-Jdk-8"><a href="#安装-Jdk-8" class="headerlink" title="安装 Jdk 8"></a>安装 Jdk 8</h2><p>默认的好像有问题</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get <span class="keyword">install</span> <span class="keyword">oracle</span>-java8-installer</div></pre></td></tr></table></figure>
+<h2 id="安装-Redis"><a href="#安装-Redis" class="headerlink" title="安装 Redis"></a>安装 Redis</h2><p>这里参考了官方推荐的 <a href="http://redis.io/topics/quickstart" target="_blank" rel="external">安装方式</a></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">wget <span class="string">http:</span><span class="comment">//download.redis.io/releases/redis-stable.tar.gz</span></div><div class="line">tar -xvzf redis-stable.tar.gz -C <span class="regexp">/data/</span>programe</div><div class="line">cd redis-stable</div><div class="line">make</div><div class="line">sudo cp src<span class="regexp">/redis-server /</span>usr<span class="regexp">/local/</span>bin/</div><div class="line">sudo cp src<span class="regexp">/redis-cli /</span>usr<span class="regexp">/local/</span>bin/</div></pre></td></tr></table></figure>
+<h2 id="安裝-Idea"><a href="#安裝-Idea" class="headerlink" title="安裝 Idea"></a>安裝 Idea</h2><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">破解地址</div><div class="line">http:<span class="comment">//idea.iteblog.com/key.php</span></div><div class="line"></div><div class="line">在桌面创建启动图标</div><div class="line"></div><div class="line">[Desktop Entry]</div><div class="line">Name=IdeaIU</div><div class="line">Comment=Rayn-IDEA-IU</div><div class="line">Exec=/home/rayn/idea/bin/idea.sh</div><div class="line">Icon=/home/rayn/idea/bin/idea.png</div><div class="line">Terminal=<span class="literal">false</span></div><div class="line">Type=Application</div><div class="line">Categories=Developer;</div></pre></td></tr></table></figure>
+<h2 id="安装-Sublime-text-3"><a href="#安装-Sublime-text-3" class="headerlink" title="安装 Sublime text 3"></a>安装 Sublime text 3</h2><ul>
+<li><p>下载地址 <a href="http://www.sublimetext.com/3" target="_blank" rel="external">http://www.sublimetext.com/3</a></p>
+</li>
+<li><p>启用方法： 控制台 输入 subl</p>
+</li>
+<li><p>安装包管理，cttl +`</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import urllib.request,os,hashlib; h = <span class="string">'2915d1851351e5ee549c20394736b442'</span> + <span class="string">'8bc59f460fa1548d1514676163dafc88'</span>; pf = <span class="string">'Package Control.sublime-package'</span>; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); <span class="keyword">by</span> = urllib.request.urlopen( <span class="string">'http://packagecontrol.io/'</span> + pf.<span class="built_in">replace</span>(<span class="string">' '</span>, <span class="string">'%20'</span>)).<span class="built_in">read</span>(); dh = hashlib.sha256(<span class="keyword">by</span>).hexdigest(); print(<span class="string">'Error validating download (got %s instead of %s), please try manual install'</span> % (dh, h)) <span class="keyword">if</span> dh != h <span class="keyword">else</span> <span class="built_in">open</span>(os.path.join( ipp, pf), <span class="string">'wb'</span> ).<span class="built_in">write</span>(<span class="keyword">by</span>)</div></pre></td></tr></table></figure>
+</li>
+<li><p>修复中文输入问题</p>
+</li>
+</ul>
+<figure class="highlight scilab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/gitgub &amp;&amp; git clone https:<span class="comment">//github.com/lyfeyaj/sublime-text-imfix.git Maybe you should firstly run the “sudo apt-get install git”</span></div><div class="line"><span class="built_in">cd</span> sublime-text-imfix &amp;&amp; ./sublime-imfix</div></pre></td></tr></table></figure>
+<p><a href="http://zhidao.baidu.com/link?url=7gZcSGqT2qgbV5mdysbX7OvoBkgc7l-HySrMiEEQJBeaznA1ZBCye8Hp5Tf_6FbHjUs3A6KCw7OOtpnvWBk2SgK8zIuukMb8a9NvoV4pkQq" target="_blank" rel="external">更多参考</a></p>
+<h2 id="安装-Mysql"><a href="#安装-Mysql" class="headerlink" title="安装 Mysql"></a>安装 Mysql</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get <span class="keyword">install</span> mysql-<span class="keyword">server</span> mysql-<span class="keyword">client</span>  </div><div class="line">sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> libmysqld-dev</div></pre></td></tr></table></figure>
+<h2 id="安装-Virtualbox"><a href="#安装-Virtualbox" class="headerlink" title="安装 Virtualbox"></a>安装 Virtualbox</h2><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://download.virtualbox.org/virtualbox/<span class="number">5.1</span><span class="meta">.6</span>/virtualbox-<span class="number">5.1_5</span><span class="meta">.1</span><span class="meta">.6</span>-<span class="number">110634</span>~Ubuntu~xenial_amd64.deb</div></pre></td></tr></table></figure>
+<h2 id="安装-Gradle"><a href="#安装-Gradle" class="headerlink" title="安装 Gradle"></a>安装 Gradle</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-<span class="keyword">get</span> install gradle</div></pre></td></tr></table></figure>
+<h2 id="安装-Tomcat8"><a href="#安装-Tomcat8" class="headerlink" title="安装 Tomcat8"></a>安装 Tomcat8</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget <span class="string">http:</span><span class="comment">//apache.mirrors.tds.net/tomcat/tomcat-8/v8.5.5/bin/apache-tomcat-8.5.5.tar.gz</span></div><div class="line"></div><div class="line">tar -zxvf redis<span class="number">-3.2</span><span class="number">.3</span>.tar.gz -C <span class="regexp">/home/</span>ming<span class="regexp">/data/</span>program</div></pre></td></tr></table></figure>
+<h2 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">参考</div><div class="line">http:<span class="regexp">//</span>www.kaijia.me<span class="regexp">/2013/</span><span class="number">05</span><span class="regexp">/ubuntu-latest-nginx-repo-collection/</span> </div><div class="line"></div><div class="line">http:<span class="regexp">//</span>www.jianshu.com<span class="regexp">/p/</span>ec9f2391c83d</div></pre></td></tr></table></figure>
+<h2 id="安装-MongoDB"><a href="#安装-MongoDB" class="headerlink" title="安装 MongoDB"></a>安装 MongoDB</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt <span class="keyword">install</span> mongodb</div></pre></td></tr></table></figure>
+<h2 id="安装-Chrome"><a href="#安装-Chrome" class="headerlink" title="安装 Chrome"></a>安装 Chrome</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">首先下载 Chrome 浏览器 ，我是通过 火狐设置代理后去官网下载</div><div class="line">/usr/<span class="keyword">bin/google-chrome-beta </span>%U --proxy-server=<span class="string">"SOCKS5://127.0.0.1:1080"</span></div></pre></td></tr></table></figure>
+<h2 id="安装-Conky-manager"><a href="#安装-Conky-manager" class="headerlink" title="安装 Conky-manager"></a>安装 Conky-manager</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-<span class="keyword">get</span> install conky-manager</div></pre></td></tr></table></figure>
+<h2 id="安装-ss-qt"><a href="#安装-ss-qt" class="headerlink" title="安装 ss-qt"></a>安装 ss-qt</h2><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo<span class="built_in"> add-apt-repository </span>ppa:hzwhuang/ss-qt5</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install shadowsocks-qt5</div></pre></td></tr></table></figure>
+<h2 id="安装-shadowsocks"><a href="#安装-shadowsocks" class="headerlink" title="安装 shadowsocks"></a>安装 shadowsocks</h2><p><a href="https://aitanlu.com/ubuntu-shadowsocks-ke-hu-duan-pei-zhi.html" target="_blank" rel="external">linux-ubuntu使用shadowsocks客户端配置</a></p>
+<h2 id="安装搜狗输入法"><a href="#安装搜狗输入法" class="headerlink" title="安装搜狗输入法"></a>安装搜狗输入法</h2><p>先安装 fcitx 等组件，命令如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get <span class="keyword">install</span> fcitx fcitx-<span class="keyword">table</span>-wubi-<span class="keyword">large</span> fcitx-ui-classic fcitx-<span class="keyword">module</span>-kimpanel</div></pre></td></tr></table></figure>
+<p>然后下载 下载地址 <a href="http://pinyin.sogou.com/linux/" target="_blank" rel="external">http://pinyin.sogou.com/linux/</a></p>
+<h2 id="安装-Wine"><a href="#安装-Wine" class="headerlink" title="安装 Wine"></a>安装 Wine</h2><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo<span class="built_in"> add-apt-repository </span>ppa:wine/wine-builds</div><div class="line">sudo apt-get update </div><div class="line">sudo apt-get install --install-recommends winehq-devel</div></pre></td></tr></table></figure>
+<h2 id="安装-Winetricks"><a href="#安装-Winetricks" class="headerlink" title="安装 Winetricks"></a>安装 Winetricks</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-<span class="keyword">get</span> install    winetricks</div></pre></td></tr></table></figure>
+<h2 id="使用-Winetricks-安装语言包"><a href="#使用-Winetricks-安装语言包" class="headerlink" title="使用 Winetricks 安装语言包"></a>使用 Winetricks 安装语言包</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">winetricks</span> dotnet20 vjrun20</div></pre></td></tr></table></figure>
+<h2 id="启动-QQ"><a href="#启动-QQ" class="headerlink" title="启动 QQ"></a>启动 QQ</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">WINEDEBUG=-all wine ~<span class="regexp">/.wine/</span>drive_c<span class="regexp">/Program\ Files/</span>Tencent<span class="regexp">/QQLite/</span>Bin</div><div class="line"><span class="regexp">/QQ.exe</span></div></pre></td></tr></table></figure>
+<h2 id="Leanote-笔记"><a href="#Leanote-笔记" class="headerlink" title="Leanote 笔记"></a>Leanote 笔记</h2><ul>
+<li>下载地址 <a href="http://pan.baidu.com/s/1bpDl4eF" target="_blank" rel="external">http://pan.baidu.com/s/1bpDl4eF</a></li>
+</ul>
+<h2 id="nvm-安装"><a href="#nvm-安装" class="headerlink" title="nvm 安装"></a>nvm 安装</h2><ul>
+<li>下载地址 <a href="http://www.kancloud.cn/summer/nodejs-install/71975" target="_blank" rel="external">http://www.kancloud.cn/summer/nodejs-install/71975</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一直记得一位老司机的话，永远不要放弃 Linux。于是乎，最近又花了些时间折腾 Linux ，在自己家的台式机上面安装了 Linux Minit 18，以下记录我在 Linux 中安装各种软件命令。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git 常见应用场景及命令</title>
+    <link href="http://yoursite.com/2016/10/10/Git-%E5%B8%B8%E8%A7%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E5%8F%8A%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/2016/10/10/Git-常见应用场景及命令/</id>
+    <published>2016-10-10T10:23:22.000Z</published>
+    <updated>2016-10-13T09:43:15.777Z</updated>
+    
+    <content type="html"><![CDATA[<p>Git 在日常开发中用的非常普遍，对于一些用的比较少的命令，总是用到再查，然后又忘记，反复如此其实挺浪费时间的，因此写了这篇文章，做些笔记。</p>
+<a id="more"></a>
+<h2 id="在-github-上-fork-了别人的项目后，及时获取最新代码"><a href="#在-github-上-fork-了别人的项目后，及时获取最新代码" class="headerlink" title="在 github 上 fork 了别人的项目后，及时获取最新代码"></a>在 github 上 fork 了别人的项目后，及时获取最新代码</h2><p>我是这样做的，在 .git 文件夹中的 config  文件中，添加了下面的代码<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[alias]</div><div class="line">    update = pull git@github<span class="selector-class">.com</span>:people_name/project_name<span class="selector-class">.git</span> master</div></pre></td></tr></table></figure></p>
+<p>以后每次更新的时候就运行<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git update</span></div></pre></td></tr></table></figure></p>
+<p>嗯，没错，就是利用了 alias  来偷懒输入那么长的地址。</p>
+<h2 id="重新设置远程仓库链接地址或者协议"><a href="#重新设置远程仓库链接地址或者协议" class="headerlink" title="重新设置远程仓库链接地址或者协议"></a>重新设置远程仓库链接地址或者协议</h2><ul>
+<li><p>比如我们在 git 上新建了或者 fork 了别人的项目，默认是走 http 协议，这样需要每次 push 都需要输入密码，而我实际上已经在 gihub 上传了我的公钥，我可以走 ssh 协议，不需要输入密码。</p>
+</li>
+<li><p>解决命令</p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">git </span><span class="string">remote </span><span class="built_in">set-url</span> <span class="string">origin </span> <span class="string">git@</span><span class="string">github.</span><span class="string">com:QiuMing/</span><span class="string">project_name.</span><span class="string">git</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="删除已经-push-到远程仓库但需要忽略的文件"><a href="#删除已经-push-到远程仓库但需要忽略的文件" class="headerlink" title="删除已经 push 到远程仓库但需要忽略的文件"></a>删除已经 push 到远程仓库但需要忽略的文件</h2><ul>
+<li><p>比如不小心吧 .idea 这个的文件不小心 push 到 git 上，需要删除。</p>
+</li>
+<li><p>解决命令</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ echo <span class="string">'.idea'</span> <span class="meta">&gt;&gt; </span>.gitignore  <span class="comment">##添加到 .gitignore</span></div><div class="line"></div><div class="line">$ git rm —cached -r .idea   <span class="comment">##从 cache 中删除</span></div><div class="line"></div><div class="line">然后 add  commit  psuh</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Git 在日常开发中用的非常普遍，对于一些用的比较少的命令，总是用到再查，然后又忘记，反复如此其实挺浪费时间的，因此写了这篇文章，做些笔记。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JWT 介绍及常见问题解决方案</title>
+    <link href="http://yoursite.com/2016/10/09/JWT-%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>http://yoursite.com/2016/10/09/JWT-介绍及常见问题解决方案/</id>
+    <published>2016-10-09T03:14:05.000Z</published>
+    <updated>2016-10-10T10:45:11.381Z</updated>
+    
+    <content type="html"><![CDATA[<p>JWT 全称Json Web Token，是一种基于 IETF 定制的开放标准 <a href="https://tools.ietf.org/html/rfc7519]https://tools.ietf.org/html/rfc7519" target="_blank" rel="external">RFC-7519</a> ，用作 <strong>身份认证</strong>与<strong>数据传输</strong> 的 Token。因其 <strong>轻量</strong> 与 <strong>无状态</strong> 的特性，被广泛用于 Api 的设计，以及解决在微服务、分布式应用中，<strong> 用户身份认证 </strong> 的问题。</p>
+<p>本文先介绍 Json Web Token ，后面在探讨 JWT 常见问题以及解决方案。</p>
+<a id="more"></a>
+<h2 id="JWT-的组成"><a href="#JWT-的组成" class="headerlink" title="JWT 的组成"></a>JWT 的组成</h2><h3 id="头部-header"><a href="#头部-header" class="headerlink" title="头部-header"></a>头部-header</h3><p>这部分包括了两个类型：</p>
+<ul>
+<li>typ: token 的类型，一般都为 JWT。</li>
+<li>alg: 算法的类型，主要有 HMAC-SHA256  和 RSA-SHA256。</li>
+</ul>
+<p><strong>tip</strong>：这里提一下两个加密算法。 HMAC-SHA-256 算法，即 HMAC 运算利用哈希算法，以一个密钥和一个消息为输入，生成一个消息摘要作为输出，因为引入了密钥，所以 HMAC-SHA-256 不在是个哈希算法，更像一个加密算法。RSA-SHA256 算法，先使用 RSA 算法加密消息，在经过 SHA256 算法来进行哈希签名。</p>
+<h3 id="载荷-Payload"><a href="#载荷-Payload" class="headerlink" title="载荷-Payload"></a>载荷-Payload</h3><p>承载了 Token 的具体内容，除去 JWT 提供的默认字段，用户也可以自定义字段。</p>
+<ul>
+<li><strong>iss</strong>: The issuer of the token，token 是给谁的。</li>
+<li><strong>sub</strong>: The subject of the token，token 主题。</li>
+<li><strong>exp</strong>: Expiration Time。 token 过期时间，Unix 时间戳格式。</li>
+<li><strong>iat</strong>: Issued At。 token 创建时间， Unix 时间戳格式。</li>
+<li><strong>jti</strong>: JWT ID。针对当前 token 的唯一标识。</li>
+</ul>
+<p>从 Payload 的结构上，我们可以看得出 JWT  保存了 <strong>用户常用的信息，</strong>服务端每次从用户请求中获取 Token 后就可以从里面拿到用户的基本信息，而不像 session + cookie 那套机制，服务端将用户信息保存在 session 中。由此我们可以说，JWT 是 <strong>自说明，无状态的</strong>。</p>
+<h3 id="签名-Signature"><a href="#签名-Signature" class="headerlink" title="签名-Signature"></a>签名-Signature</h3><p>JWT 的加密解密过程都是在服务端完成，用户登录后成功后，每次请求都带上 Token 作为身份凭证，客户端可以读取 token 的内容，但不需要编辑它。所以，为了防止这个身份凭证被人串改，需要签名。</p>
+<p>签名要利用 Header 中声明的加密算法，如选用了HmacSHA256 算法，则公式如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$encodedContent</span> = base64UrlEncode(header) + <span class="string">"."</span> + base64UrlEncode(payload);</div><div class="line"><span class="variable">$signature</span> = <span class="built_in">hash</span>HmacSHA256(<span class="variable">$encodedContent</span>);</div></pre></td></tr></table></figure></p>
+<p>因为有许多类库已经提供了对 JWT 的支持，所以签名和校验签名，它们都会帮我们完成。我们也可以在 <a href="http://jwt.io" target="_blank" rel="external">http://jwt.io</a> 上来验证我们的签名。</p>
+<h2 id="Token-机制的-认证流程"><a href="#Token-机制的-认证流程" class="headerlink" title="Token 机制的 认证流程"></a>Token 机制的 认证流程</h2><ul>
+<li><p>客户端使用用户名跟密码请求登录，登陆成功服务端发放 Token</p>
+</li>
+<li><p>客户端收到 Token 以后可以把它存储起来，比如放在 Cookie 里或者 Local Storage 或者响应头Authorization里</p>
+</li>
+<li><p>客户端每次向服务端请求资源的时候，在 header 中带上 Token</p>
+</li>
+<li><p>服务端使用拦截器校验每个请求header 中的 token，如果验证成功则返回请求的数据。</p>
+</li>
+</ul>
+<h2 id="JWT-的安全性问题"><a href="#JWT-的安全性问题" class="headerlink" title="JWT 的安全性问题"></a>JWT 的安全性问题</h2><p>注意到 JWT 中的承载用户数据的 Payload 这部分数据只是简单的经过 base64 处理，这意味着一旦有 Token 泄露，这部分数据就会被暴露。针对这一点，在生产环境中，我们都会要求全站使用 HTTPS，现如今，这应该是企业站点的标配了，可以很大程度上减少 Token 被盗。其次，太过隐私的东西，不要放在 Payload。另外，我们可以使用 JSON Web Encryption（JWE）来对 Payload 中部分数据，乃至整个 Payload 进行对称加密，不过这回导致额外的开销。</p>
+<h2 id="JWT-的优点"><a href="#JWT-的优点" class="headerlink" title="JWT 的优点"></a>JWT 的优点</h2><ul>
+<li><p>JWT 是无状态的，对 resetful 接口与架构支持非常友好，这使得它更适用于 app 的开发，因为不需要再去把 cookie 那一套东西搬过来；也更加方便集群拓展，因为我们不需要再去搭建和维护一个会话集群。</p>
+</li>
+<li><p>天生支持跨域访问，因为 JWT 把用户的基本信息存储在 HTTP header 中，如果使用 cookie，则还需要使用一些跨域的解决方案。</p>
+</li>
+<li><p>天然防 CSRF 攻击。CSRF 攻击成功的原因正是黑客利用了 cookie 中存储的有效认证信息，用户在不知情的情况下，在别的网站点击了了它精心构造的链接，由此 cookie 在用户不知情的情况下被利用了。</p>
+</li>
+<li><p>基于现有的标准，许多语言都提供了对 JWT 支持的包，一些框架也提供了对 JWT 的整合，入手也很简单。</p>
+</li>
+<li><p>性能更优，因为不使用 cookie + session  作为认证的机制， 所有服务器端不需要在每次会话对 cookie 和 session  进行序列与反序列化，我们需要做的就是使用选定的算法和私钥解密令牌，获取用户信息。</p>
+</li>
+</ul>
+<h2 id="JWT-常见问题及解决方案"><a href="#JWT-常见问题及解决方案" class="headerlink" title="JWT 常见问题及解决方案"></a>JWT 常见问题及解决方案</h2><h3 id="如何使-token-失效？"><a href="#如何使-token-失效？" class="headerlink" title="如何使 token 失效？"></a>如何使 token 失效？</h3><p>在这个问题在 <a href="http://stackoverflow.com/questions/21978658/invalidating-json-web-tokens" target="_blank" rel="external">stackoverflow</a> 上有讨论，在此我总结了下，token 需要失效的场景以及解决方案：</p>
+<table>
+<thead>
+<tr>
+<th>应用场景</th>
+<th>解决方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户退出登陆，但是 token 尚未过期</td>
+<td>客户端移除 token，服务端使用 redis 维护一份 token 黑名单，并设置超时时间为其剩余的有效时间</td>
+</tr>
+<tr>
+<td>用户在登陆状态下，修改了密码</td>
+<td>服务端发放新 token ，旧 token 放入redis 黑名单，设置超时时间</td>
+</tr>
+<tr>
+<td>admin 禁用了账户，不允许账户登陆</td>
+<td>将用户放入黑名单</td>
+</tr>
+<tr>
+<td>admin 修改了 token 中某些信息，比如用户角色</td>
+<td>服务端发放新 token ，旧 token 放入redis 黑名单，设置超时时间。</td>
+</tr>
+<tr>
+<td>某些特殊情况下需要禁止某个用户的登陆，比如发现 token 被黑客盗取。</td>
+<td>如果是单个用户，可以暂时禁用账户，如果是多个，考虑修改加密的key，注意这会让全部 token 失效</td>
+</tr>
+</tbody>
+</table>
+<p><strong>tip</strong>: 使用 redis 来维护 token  黑名单，这里存储在 redis 的数据实体可以自己定义，以下是我的设计:<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"key"</span>: <span class="string">"userId"</span>,</div><div class="line">    <span class="attr">"value"</span>: &#123;</div><div class="line">        <span class="attr">"invalid_type"</span>: <span class="string">"失效类型:退出登陆、修改密码、修改角色、账号禁用"</span>,</div><div class="line">        <span class="attr">"start_time"</span>: <span class="string">" token 的 发放时间 iat  &lt; start_time 都视为非法"</span>,</div><div class="line">        <span class="attr">"exp"</span>: <span class="string">"redis 存储时间"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="如何实现-token-自动刷新"><a href="#如何实现-token-自动刷新" class="headerlink" title="如何实现 token 自动刷新?"></a>如何实现 token 自动刷新?</h3><p>因为 token 设置了一个有效期，所以需要引入一套刷新机制，避免让用户重新输入密码登陆而带来的体验问题。和上面的问题一样，这个问题在  <a href="http://stackoverflow.com/questions/26739167/jwt-json-web-token-automatic-prolongation-of-expiration" target="_blank" rel="external">stackoverflow</a> 也有讨论。综合笔者查阅的资料，总结如下：</p>
+<p>这个问题要具体情况具体分析：</p>
+<h4 id="针对手机-App-应用"><a href="#针对手机-App-应用" class="headerlink" title="针对手机 App 应用"></a>针对手机 App 应用</h4><p>对于 App 这种需要安装在手机上的应用，因为一般情况下一个手机对应一个用户，所以很多 App 一般都只输入一次密码，对此有以下几种解决方案：</p>
+<ul>
+<li><p>客户端保存密码自动登陆方案。客户端获取用户密码后，将密码对称加密保存在客户端，Token 失效后，客户端在将密码取出帮用户自动登陆，从而获取新的 token。这种方案适合 app ，保存密码在本地这种方案要重点解决 密钥和用户密码的安全。</p>
+</li>
+<li><p>使用”永久”有效的 refresh token 方案。永久的意思是指在除去用户修改密码这种特性情况外有效。当然这个 refresh token  要和用户设备的信息挂钩，要确保只能在一个设备上使用。服务端也要对这个 refresh token 有所控制，即要做到随时可以时这个 refresh token 失效。因此，这个 refresh token 常被设计为一个包含了用户的设备信息、以及服务端存储的一个随机数。</p>
+</li>
+</ul>
+<h4 id="针对-Web-应用"><a href="#针对-Web-应用" class="headerlink" title="针对 Web 应用"></a>针对 Web 应用</h4><p>对于 Web 应用，因为依托于浏览器，这里在考虑 Token 自动刷新时，更多借鉴与 session 的机制。</p>
+<ul>
+<li><p>定时校验刷新 Token 方案。具体思路为，将 Token 过期时间设置长一点，比如3个小时；然后每过一定时间段，比如15分钟，然后客户端通过一个全局的拦截器，在每次请求 Api 的时候，计算距离超时时间是否又缩短了一个小时，是的话就向服务端申请新的 token ，新 token 有效时间延长了一个小时。这种方案相对灵活，适合 Web App。</p>
+</li>
+<li><p>使用一个有较长期限的 refresh token 方案。这个 refresh token  相对于普通的 token 只是有效时间长一些。它的设计相对麻烦，因为他同要解决 refresh token 自刷新问题，服务端可控制失效问题，这里可以借鉴 Oauth 2.0 中的refresh token 机制。</p>
+</li>
+</ul>
+<h2 id="JWT-的不足"><a href="#JWT-的不足" class="headerlink" title="JWT 的不足"></a>JWT 的不足</h2><p>JWT 设计的初衷是轻量、无状态，这是它的优点，但也是它的不足之处(事物都有两面性)，因为它大小有限制，另外无状态意味着它不能即使的判断 Token 的有效性，在需要 token 过期时要引入黑名单机制。</p>
+<p><strong>tip</strong>:其实有种做法是在数据库里面存一些字段，然后每次校验 token 时候都去查询数据库，这种做法可以做到即时校验 token 的有效性，但是这种做法开销较大，笔者并不推荐。也有人说这种做法违背了 JWT 无状态的初衷，笔者的理解是，每次的数据库查询，硬是把 token 变成了带状态的。</p>
+<h2 id="JWT-存储-浏览器"><a href="#JWT-存储-浏览器" class="headerlink" title="JWT 存储(浏览器)"></a>JWT 存储(浏览器)</h2><p>客户端获取 Token 后， 需要临时存储，目前可以选择 local storage、session storage 和 cookie。注意如果 token 存放在 Web Storage (local storage、session storage)，需要留意 XSS 注入，因为 js 可以访问到这里。如果放入 cookie 的话，要记得加上 readOnyl，不过这又要留意 CSRF 攻击了。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1、<a href="https://tools.ietf.org/html/rfc7519" target="_blank" rel="external">RFC7519 协议</a></p>
+<p>2、<a href="http://stackoverflow.com/questions/21978658/invalidating-json-web-tokens#" target="_blank" rel="external">stackoverflow 上关于如何使 Token 失效的探讨</a></p>
+<p>3、<a href="http://stackoverflow.com/questions/26739167/jwt-json-web-token-automatic-prolongation-of-expiration" target="_blank" rel="external">stackoverflow 上关于 Token 到期自动延长的解决方案的探讨</a></p>
+<p>4、<a href="https://auth0.com/docs/tokens/refresh-token#revoke-a-refresh-token" target="_blank" rel="external">auth0 中永久refresh 的设计</a></p>
+<p>5、<a href="https://en.wikipedia.org/wiki/Stateless_protocol" target="_blank" rel="external">wiki 上关于无状态定义的描述</a></p>
+<p>6、<a href="https://auth0.com/blog/angularjs-authentication-with-cookies-vs-token/" target="_blank" rel="external">cookies Vs token</a></p>
+<p>7、<a href="https://auth0.com/blog/refresh-tokens-what-are-they-and-when-to-use-them/" target="_blank" rel="external">refresh token 使用</a></p>
+<p>8、<a href="https://stormpath.com/blog/where-to-store-your-jwts-cookies-vs-html5-web-storage" target="_blank" rel="external">Where to Store your JWTs – Cookies vs HTML5 Web Storage</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;JWT 全称Json Web Token，是一种基于 IETF 定制的开放标准 &lt;a href=&quot;https://tools.ietf.org/html/rfc7519]https://tools.ietf.org/html/rfc7519&quot;&gt;RFC-7519&lt;/a&gt; ，用作 &lt;strong&gt;身份认证&lt;/strong&gt;与&lt;strong&gt;数据传输&lt;/strong&gt; 的 Token。因其 &lt;strong&gt;轻量&lt;/strong&gt; 与 &lt;strong&gt;无状态&lt;/strong&gt; 的特性，被广泛用于 Api 的设计，以及解决在微服务、分布式应用中，&lt;strong&gt; 用户身份认证 &lt;/strong&gt; 的问题。&lt;/p&gt;
+&lt;p&gt;本文先介绍 Json Web Token ，后面在探讨 JWT 常见问题以及解决方案。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="JWT" scheme="http://yoursite.com/tags/JWT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用JHispter开发微服务</title>
+    <link href="http://yoursite.com/2016/07/15/%E4%BD%BF%E7%94%A8JHispter%E5%BC%80%E5%8F%91%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    <id>http://yoursite.com/2016/07/15/使用JHispter开发微服务/</id>
+    <published>2016-07-15T09:19:32.000Z</published>
+    <updated>2016-10-09T02:57:58.403Z</updated>
+    
+    <content type="html"><![CDATA[<!--
+# <i class="fa fa-sitemap"></i> 使用JHipster开发微服务
+
+点此查看 [原文地址](https://jhipster.github.io/microservices-architecture/#production)
+## 摘要
+
+1. [微服务架构 vs 一体化架构](#microservices_vs_monolithic)
+2. [概览](#overview)
+3. [JHipster 的API 网关](#gateway)
+  * [使用网关进行HTTP路由](#http_routing)
+  * [安全](#security)
+  * [自动生成文档](#documentation)
+  * [请求速率限制](#rate_limiting)
+  * [访问控制策略](#acl)
+4. [JHipster 的注册中心](#registry)
+  * [JHipster 注册中心概览](#registry_overview)
+  * [JHipster 注册中心的安全保障](#securing_registry)
+  * [在JHipster 上注册你的应用](#registry_app_configuration)
+5. [创建微服务应用](#microservices)
+  * [为微服务应用生成实体对象](#generating_entities)
+  * [使用HazelCast做分布式缓存](#hazelcast)
+  * [不带数据库的微服务应用](#no_database)
+6. [使用 Docker Compose](#docker_compose)
+7. [使用Jhispter Console 和ELK技术栈来监控服务](#monitoring)
+8. [生产环境](#production)
+  * [部署到 Docker Swarm](#docker_swarm)
+  * [部署到 CloudFoundry](#cloudfoundry)
+  * [部署到 Heroku](#heroku)
+-->
+<h2 id="微服务架构-vs-一体化架构"><a href="#微服务架构-vs-一体化架构" class="headerlink" title=" 微服务架构 vs 一体化架构"></a><a name="microservices_vs_monolithic"></a> 微服务架构 vs 一体化架构</h2><p>使用 JHipster 生成应用时，第一个问题就是让你选择你要的生成的应用(目前有4个选项)，但实际上你是在两种架构风格里面做选择：</p>
+<ul>
+<li>一体化架构，用来创建单独的一个应用，包含前端angular代码和后端spring boot 相关代码，项目中所有代码都在一个应用中。</li>
+<li>微服务架构，进行了前后端分离，优点是它可以让你很容易的控制单个应用的规模，并处理好这些应用中一些简单细小的问题。</li>
+</ul>
+<p>相对来说，一体化架构是比较容易上手，官网默认推荐这个，如果是刚接触jhipstert，建议从这个入手，熟悉后，如果项目有要求，则再选择微服务架构应用。</p>
+<p><em>下面部分则主要讲解下使用JHipster进行微服务架构。</em></p>
+<a id="more"></a>
+<h2 id="概览"><a href="#概览" class="headerlink" title=" 概览"></a><a name="overview"></a> 概览</h2><p>JHipster 微服务架构的工作方式如下：</p>
+<ul>
+<li><a href="#gateway">JHipster gateway</a> ，是一个可以通过生成器直接生成的(在第一个问题里面选择 microservice gateway)完整应用，包含来服务端和前端，用来处理web请求。一个微服务架构里面可以同时有几个网关，如果你遵循<a href="https://www.thoughtworks.com/cn/insights/blog/bff-soundcloud" target="_blank" rel="external"> Backends for Frontends pattern</a>这种模式，当然这不是强制性的。</li>
+</ul>
+<ul>
+<li><p><a href="#registry">JHipster Registry</a> JHipster的注册中心，可以在github上 <a href="https://github.com/jhipster/jhipster-registry" target="_blank" rel="external">获取</a>，所有的微服务应用和网关都是从注册中心获取配置，所以它必须要先运行起来。</p>
+</li>
+<li><p>JHipster的微服务应用实例，可以通过生成器直接生成(在第一个问题里面选择microservice application)，它们是提供服务的具体实现。它们是无状态的。可以同时并行运行好几个相同的实例，来处理海量的请求。</p>
+</li>
+<li><p><a href="https://github.com/jhipster/jhipster-console" target="_blank" rel="external">JHipster Console</a>，JHipster的控制台，提供了服务监控和警报的功能，基于ELK 技术栈。</p>
+</li>
+</ul>
+<p>在下图中，绿色的组件代表你的特定应用，蓝色组件代表的底层基础架构：</p>
+<p><img src="https://jhipster.github.io/images/microservices_architecture_1.png" alt="Diagram"></p>
+<h2 id="JHipster-的API-网关"><a href="#JHipster-的API-网关" class="headerlink" title=" JHipster 的API 网关"></a><a name="gateway"></a> JHipster 的API 网关</h2><p>JHipster 可以生成API gateway。 这是一个普通的JHipster 应用,在使用yo jhipster时第一个问题可以选择生成，你可以像开发一个普通应用来开发它。它在微服务架构中扮演一个入口的角色，提供了http 路由，负载均衡，api 文档、保障服务质量和安全的功能。</p>
+<h3 id="使用网关进行HTTP路由"><a href="#使用网关进行HTTP路由" class="headerlink" title=" 使用网关进行HTTP路由"></a><a name="http_routing"></a> 使用网关进行HTTP路由</h3><p>Jhipster 的网关和服务应用启动之前，需要先启动 <a href="https://github.com/jhipster/jhipster-registry" target="_blank" rel="external">Jhipster register</a> 项目作为注册中心。应用在配置注册中心地址时候，只需要修改 <code>eureka.client.serviceUrl.defaultZone</code>key 对应的值 （<code>在 src/main/resources/config/application.yml</code> 文件中）。</p>
+<p>网关将自动代理所有请求的服务，并沿用应用程序的名称，例如：当微服务应用<code>APP1</code>在注册中心注册后，可以通过<code>/APP1</code>网址来访问。</p>
+<p>再举个例子，如果你的网关运行在<code>localhost:8080</code>，你可以通过 <a href="http://localhost:8080/app1/rest/foos" target="_blank" rel="external">http://localhost:8080/app1/rest/foos</a> 获得通过微服务APP1服务提供的的<code>foos</code>资源。</p>
+<p>另外，JHipster中REST接口资源都是受保护的，在通过浏览器访问这些接口时，你需要带上正确JWT(在请求头的header上，下面安全章节的时候还会在提到)，或在<code>MicroserviceSecurityConfiguration</code>类中注释掉相关代码。</p>
+<p>如果有多个相同的服务实例在同时运行，网关可以从JHipster的注册中心获取这些实例，并且：</p>
+<ul>
+<li><p>使用 <a href="https://github.com/Netflix/ribbon" target="_blank" rel="external">Netflix Ribbon</a> 进行负载均衡。</p>
+</li>
+<li><p>采用 <a href="https://github.com/Netflix/hystrix" target="_blank" rel="external">Netflix Hystrix</a> 提供的熔断机制，这样可以将挂的运行实例快速安全地移除。</p>
+</li>
+</ul>
+<p>每个网关应用都提供了http 路由和服务实例监控的功能，在后台”管理员&gt;网关”菜单中可以看到。 </p>
+<h3 id="安全"><a href="#安全" class="headerlink" title=" 安全"></a><a name="security"></a> 安全</h3><h4 id="JWT-JSON-Web-Token"><a href="#JWT-JSON-Web-Token" class="headerlink" title="JWT (JSON Web Token)"></a>JWT (JSON Web Token)</h4><p>JWT（JSON网络令牌）是现在的一个业界标准，简单易用，可以为微服务应用提供安全保障。</p>
+<p>JHispter使用 <a href="https://github.com/jwtk/jjwt" target="_blank" rel="external">JJWT library</a> 库，由Stormpath提供，用来实现具体的jwt。</p>
+<p>所有的toekn都由网关生成，并传送给底层微服务应用。因为它们共享一个公共的密钥，所以微服务应用能够验证该令牌，并且使用该令牌认证用户。</p>
+<p>这些令牌是自给自足的：它们具有认证和授权的信息，所以微服务应用不需要查询数据库或外部系统。这是点保证了微服务的可扩展性，所以很重要。</p>
+<p>为了保证服务的安全运行，一个token必须在所有应用程序之间共享：</p>
+<ul>
+<li><p>对于每个应用，其默认的token是独一无二的，并通过JHipster产生，被存储在 <code>.yo - rc.json</code> 文件</p>
+</li>
+<li><p>令牌的值可以通过修改在 <code>src /mian/resources/config/application.yml</code> 文件中的 <code>jhipster.security.authentication.jwt.secret</code> 的值来进行配置</p>
+</li>
+<li><p>一个好的实践是在生产环境和开发环境采用不同的token</p>
+</li>
+</ul>
+<h4 id="OAuth2"><a href="#OAuth2" class="headerlink" title="OAuth2"></a>OAuth2</h4><p>此功能目前处于 <strong>BETA</strong> 阶段，因此它的文档还没有完成。</p>
+<p>JHipster提供生成一个基于Srping security 的”UAA(用户账号和认证信息)”的服务 。这项服务采用Oauth2 token机制，来保证服务网关的安全。</p>
+<p>在这基础上，服务网关利用Spring Security对jwt的支持来传递token给其它底层的微服务应用。</p>
+<h3 id="自动生成文档"><a href="#自动生成文档" class="headerlink" title=" 自动生成文档"></a><a name="documentation"></a> 自动生成文档</h3><p>Jhipster 的网关整合了swagger API，所以我们可以很方便的使用 <code>Swagger UI</code> 和 <code>swagger-codegen</code>。在管理后台的”admin&gt; API”的菜单中，可以看到网关的API，以及所有注册了微服务的API。</p>
+<p>通过下拉列表，可以查看有Swagger 生成的API文档，这些API都可以在线测试。测试的时候token会自动添加到Swagger UI 的接口中去，所以所有的请求都是在沙盒外进行。</p>
+<h3 id="请求速率限制"><a href="#请求速率限制" class="headerlink" title=" 请求速率限制"></a><a name="rate_limiting"></a> 请求速率限制</h3><p>这是一个高级功能，需要建立一个Cassandra 集群（通过Docker Compose configuration 可以比较容易的搭建起来）。</p>
+<p>网关提供限速的功能，所以REST请求的次数可以被限制：</p>
+<ul>
+<li><p>通过IP地址（匿名用户）</p>
+</li>
+<li><p>用户登录（登录用户）</p>
+</li>
+</ul>
+<p>JHipster将使用Cassandra 集群存储的请求数据，并且对超出限制请求将发送HTTP 429<br>（太多请求）错误。每个用户的默认限速为每小时10万API调用。</p>
+<p>这是一个重要的功能，可以保护微服务不被一些特殊的的用户请求拖垮服务器。</p>
+<p>Jhipster register 作为一个管理 REST 接口资源的关卡，它对用户的安全信息拥有绝对控制权，因此它可以很容易扩展，以提供根据用户角色来进行特定速率限制。</p>
+<p>为开启速率限制，需要在 <code>application-dev.yml</code> 或 <code>application-prod.yml</code> 中进行配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">jhipster:</span></div><div class="line"><span class="attr">    gateway:</span></div><div class="line"><span class="attr">        rate-limiting:</span></div><div class="line"><span class="attr">            enabled:</span> <span class="literal">true</span></div></pre></td></tr></table></figure>
+<p>当然 Cassandra 集群也需要搭建并配置好. 如果采用 JHipster’s Docker Compose 的配置(在 <code>src/main/docker</code> 中)，则可以正常运行。想自己手动设置群集，这里有些步骤要注意下：</p>
+<ul>
+<li><p>首先要有一个可用的Cassandra集群。</p>
+</li>
+<li><p>需要配置好JHipster特定的限速表，相关的 <code>create_keyspace.cql</code> 和 <code>create_tables.cql</code> 脚本，在 <code>src/main/resources/config/cql</code> 目录下。</p>
+</li>
+<li><p>该群集必须在 <code>application-*.yml</code>文件中进行配置，其对应的键为<code>spring.data.cassandra</code>（已生成了默认配置）</p>
+</li>
+<li><p>如果你想添加更多的规则，或修改现有规则，你需要修改RateLimitingFilter类。比如说，如果你要进行以下情况的限制：</p>
+</li>
+<li><p>降低HTTP调用的限制</p>
+</li>
+<li><p>添加每分钟或每日限制</p>
+</li>
+<li><p>删除了”管理员”用户的所有限制</p>
+</li>
+</ul>
+<h3 id="访问控制策略"><a href="#访问控制策略" class="headerlink" title=" 访问控制策略"></a><a name="acl"></a> 访问控制策略</h3><p>默认情况下所有已注册的微服务都可以通过网关访问。如果你想从通过网关排除特定的API ，你可以使用网关的访问控制过滤器来对具体的访问进行控制。在 <code>application-*.yml</code> 文件中对 <code>jhipster.gateway.authorized-microservices-endpoints</code> 进行配置，默认配置为：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">jhipster:</span></div><div class="line"><span class="attr">    gateway:</span></div><div class="line"><span class="attr">        authorized-microservices-endpoints:</span> <span class="comment"># Access Control Policy, if left empty for a route, all endpoints will be accessible</span></div><div class="line"><span class="attr">            app1:</span> /api,/v2/api-docs <span class="comment"># recommended dev configuration</span></div></pre></td></tr></table></figure>
+<p>如果你只想微服务bar的 <code>/api/foo</code> 接口可以被访问，那么你只需要进行如下配置：</p>
+<pre><code>jhipster:
+    gateway:
+        authorized-microservices-endpoints:
+            bar: /api/foo
+</code></pre><h2 id="JHipster-的注册中心"><a href="#JHipster-的注册中心" class="headerlink" title=" JHipster 的注册中心"></a><a name="registry"></a> JHipster 的注册中心</h2><h3 id="JHipster-注册中心概览"><a href="#JHipster-注册中心概览" class="headerlink" title=" JHipster 注册中心概览"></a><a name="registry_overview"></a> JHipster 注册中心概览</h3><p>JHipster Registry 是一个可运行的应用，由JHipster 的团队开发。和JHipster generator一样，也是开源的，遵循Apache 2-licensed，也放在github上，<a href="https://github.com/jhipster/jhipster-registry" target="_blank" rel="external">点此查看</a>。</p>
+<p>可以在github上clone或者下载Registry的源码，如果使用了Jhipster generator，则建议使用使用和它相同tag的Registry，它的运行方式和其它的应用一样：</p>
+<ul>
+<li><p>开发环境下，直接运行 <code>./mvnw</code>，它默认采用开发环境下的配置文件，Eureka Registry 将可以通过 <a href="http://127.0.0.1:8761/" target="_blank" rel="external">http://127.0.0.1:8761/</a> 进行访问。</p>
+</li>
+<li><p>生产环境下，使用./mvnw -Pprod打包生成可执行WAR文件。</p>
+</li>
+</ul>
+<p>如果想通过docker镜像来运行JHipster Registry，Docker Hub 中也有提供，在<a href="https://hub.docker.com/r/jhipster/jhipster-registry/" target="_blank" rel="external">JHipster Registry</a>，当然这个镜像是预先配置好。</p>
+<ul>
+<li>运行 <code>docker-compose -f src/main/docker/jhipster-registry.yml up</code> 来启动JHipster Registry. 然后 Eureka Registry 就会监听你8761 端口 , 由此便可以通过 <a href="http://127.0.0.1:8761/" target="_blank" rel="external">http://127.0.0.1:8761/</a> 来访问</li>
+</ul>
+<p>更多关于docker和JHipster Registry的问题，可以参见<a href="https://jhipster.github.io/docker-compose/" target="_blank" rel="external">docker Compose documentation </a></p>
+<h3 id="JHipster-注册中心的安全保障"><a href="#JHipster-注册中心的安全保障" class="headerlink" title=" JHipster 注册中心的安全保障"></a><a name="securing_registry"></a> JHipster 注册中心的安全保障</h3><p>JHipster Registry 默认是受保护的，需要使用账户和密码来登陆，默认账号密码为”admin/admin”。</p>
+<p>微服务应用当然也是以admin的角色在Registry上进行注册，但是是通过HTTP Basic 认证。所以如果你的微服务应用不能连接到注册中心，你会收到”401 authentication error”的错误信息，因为你配置错了某些东西。</p>
+<p>为了保障JHipster Registry 的安全：</p>
+<ul>
+<li><p>你必须修改admin的密码。此密码可以在Spring boot 的 <code>application-*.yml</code> 文件中通过修改 <code>security.user.password</code> 对应的值来实现，或者你也可以新建一个  <code>SECURITY_USER_PASSWORD</code> 环境变量。在<a href="https://jhipster.github.io/docker-compose/" target="_blank" rel="external">Docker Compose sub-generator</a>中，用到了这个变量。</p>
+</li>
+<li><p>因为你的应用程序是通过HTTP连接到Registry，所以保障连接通道的安全性很重要，其中一个比较简单的方式是采用HTTPS。</p>
+</li>
+</ul>
+<h3 id="在JHipster-上注册你的应用"><a href="#在JHipster-上注册你的应用" class="headerlink" title=" 在JHipster 上注册你的应用"></a><a name="registry_app_configuration"></a> 在JHipster 上注册你的应用</h3><p>JHipster Registry 是采用了 <a href="https://github.com/Netflix/eureka" target="_blank" rel="external">Netflix Eureka server</a> 和 <a href="http://cloud.spring.io/spring-cloud-config/spring-cloud-config.html" target="_blank" rel="external">Spring Config Server</a>。<br>当微服务应用和或者微服务网关启动的时候，它们会首先连接到JHipster Registry去获取配置信息。</p>
+<p>这些配置是指spring boot 的配置，也就是 <code>application-*.yml</code>  文件。但它们存储在中央服务器上，易于管理。</p>
+<p>当整个服务启动时，微服务应用或者网关会从Registry上获取服务的配置信息并且覆盖它们原来存储在本地的配置文件。</p>
+<p>以下两种配置信息是可以用的：</p>
+<ul>
+<li><p>开发环境下的本地配置文件（使用 dev profile），使用本地的文件系统。</p>
+</li>
+<li><p>git 配置信息，用在生产环境下（使用 Jhipster prod profile），存储在git 服务中。使用git可以建立tag、分支，或者回滚配置信息，这是生产环境下非常实用。</p>
+</li>
+</ul>
+<p>为了集中管理微服务的配置，你需要按照 <code>application-*.yml</code> 的格式创建配置文件，并放在Registry 的config 文件下。要求 <strong>appname</strong> 和 <strong>profile</strong> 你的微服务应用同名和profile对应。</p>
+<p>举个例子，添加了一个 <code>gateway-prod.yml</code> 文件将对所有的名为gateway的应用采用生产环境下的配置文件。此外，定义在 <code>application[-dev|prod].yml</code> 配置将对所有的应用产生效果。</p>
+<p>上面提到网关路由是通过Spring boot 来配置，它们其实也可以通过Spring Config Server 来管理。举个例子，你可以在  <code>v1</code> 分支上，将应用 <code>app1-v1</code> 路由到 <code>/appl</code> 的url上，而在 <code>v2</code> 分支，将 <code>app1-v2</code> 路由到 <code>/app1</code> 的url上。这是一种无缝升级微服务的好方式，以达到不需要停止服务就可以升级的效果。</p>
+<h2 id="创建微服务应用"><a href="#创建微服务应用" class="headerlink" title=" 创建微服务应用"></a><a name="microservices"></a> 创建微服务应用</h2><p>微服务应用实例是可以通过 JHipster 生成的，没有前端（生成的微服务网关会有前端，用到了angularJS ），它要配合着 Jhipster Registry 才能正常运行。</p>
+<h3 id="为微服务应用生成实体对象"><a href="#为微服务应用生成实体对象" class="headerlink" title=" 为微服务应用生成实体对象"></a><a name="generating_entities"></a> 为微服务应用生成实体对象</h3><p>在用 <a href="https://jhipster.github.io/creating-an-entity/" target="_blank" rel="external">entity sub-generator</a>为微服务应用中生成entity时，和在一体化架构应用中生成entity的方式有点不一样，因为微服务实现了前后端分离，微服务应用后台只需要提供接口，不需要前端代码，因此它也就不需要生成前端代码。</p>
+<p>首先，在微服务的应用中生成实体，可以采用在一体化应用中生成实体对象的方法，也可以使用 <a href="https://jhipster.github.io/jhipster-uml/" target="_blank" rel="external">JHipster UML</a> 或者 <a href="https://jhipster.github.io/jdl-studio/" target="_blank" rel="external">JDL Studio</a> 来生成更加复杂的实体以及关系。当然这不会生成AngularJS代码。</p>
+<p>然后，在微服务网关应用中，再次运行<a href="https://jhipster.github.io/creating-an-entity/" target="_blank" rel="external">entity sub-generator</a>，会在开始时多出一个问题，这是专门针对网关应用的：</p>
+<ul>
+<li><p>有两个选项：要么像在一体化架构应用中生成实体方式那样，正常生成一个新的实体（微服务网关应用本身是一个完整的 JHipster 应用，这点上它有点像是个一体化应用），要么是利用已有的 JHipster 配置信息来生成。</p>
+</li>
+<li><p>如果选择后者，你需要输入微服务应用的路径，然后 JHipster 会产生网关上的前端代码（相当于是在网关应用中通过页面来管理微服务应用实体）。</p>
+</li>
+</ul>
+<h3 id="使用HazelCast做分布式缓存"><a href="#使用HazelCast做分布式缓存" class="headerlink" title=" 使用HazelCast做分布式缓存"></a><a name="hazelcast"></a> 使用HazelCast做分布式缓存</h3><p>如果你的应用采用了 SQL 的数据库，JHipster 针对微服务 给出了不同的，支持二级缓存的解决方案：</p>
+<ul>
+<li>JHipster 的默认微服务缓存解决方案是采用 Hazelcast</li>
+<li>你也可以采用 Ehcache(一体化应用默认支持的方案) ，或者干脆不适用缓存。</li>
+</ul>
+<p>默认的 Hazelcast 解决方案是支持微服务的，它可以很好的支持你拓展服务：</p>
+<ul>
+<li><p>使用本地缓存，你是单个服务没有一个可以同步的缓存，可能导致数据不一致。</p>
+</li>
+<li><p>不使用任何缓存，随着服务的拓展增加，系统的负担都放到来数据库，这也不是个很好的方案。</p>
+</li>
+</ul>
+<p>采用 Hazelcast做缓存，需要做些特别的配置：</p>
+<ul>
+<li>在启动时，应用程序会连接到 JHipster 注册服务中，找到和他相同的服务实例。<ul>
+<li>如果使用了 <code>dev</code> profile，JHipster 将在本地主机上 <code>127.0.0.1</code> 上创建这些实例的群集 ，使用每个实例不同的端口。默认情况下， Hazelcast端口是 <code>你的应用程序的端口+ 5701</code> (所以如果你的应用程序的端口是 <code>8081</code>，Hazelcast将使用端口 <code>13782</code>)</li>
+<li>如果使用了 <code>prod</code> profile，JHipster 用它找到的所有其他节点来构建一个群集，使用Hazelcast默认的端口 (<code>5701</code>)</li>
+</ul>
+</li>
+</ul>
+<h3 id="不带数据库的微服务应用"><a href="#不带数据库的微服务应用" class="headerlink" title=" 不带数据库的微服务应用"></a><a name="no_database"></a> 不带数据库的微服务应用</h3><p>只有微服务应用可以创建无数据库的程序。这是因为微服务应用可以很小，可以没有用户管理的代码。</p>
+<p>一个没有数据库的微服务应用很小，可用于连接到一个遗留的后端系统。</p>
+<h2 id="使用-Docker-Compose-开发和部署"><a href="#使用-Docker-Compose-开发和部署" class="headerlink" title=" 使用 Docker Compose 开发和部署"></a><a name="docker_compose"></a> 使用 Docker Compose 开发和部署</h2><p>开发微服务系统，意味着你可能需要在几个不同的 services 和 databases 上同时工作，而 Docker Compose 则是一个针对此情况，管理开发，测试和生产环境的绝佳工具。</p>
+<p>为此我们有一篇专门的文档来介绍 <a href="https://jhipster.github.io/docker-compose#microservices" target="_blank" rel="external">Docker Compose documentation</a> ，我们强烈建议在开发微服务架构的系统前阅读这篇文章，熟悉这方面的知识。</p>
+<h2 id="使用Jhispter-Console-和ELK技术栈来监控服务"><a href="#使用Jhispter-Console-和ELK技术栈来监控服务" class="headerlink" title="使用Jhispter Console 和ELK技术栈来监控服务"></a><a name="monitoring"></a>使用Jhispter Console 和ELK技术栈来监控服务</h2><p>当你使用 docker-Compose sub-generator 的时候，会询问你是否需要为你的应用添加监控。如果选择是，它将会在你的 <code>docker-compose.yml</code> 文件下添加 JHipster-Console。当你启动系统后，就可以有通过访问 <a href="http://localhost:5601" target="_blank" rel="external">http://localhost:5601</a> 来获取系统应的日志和各种指标。更多关于监控的东西，可以参见 <a href="http://jhipster.github.io/monitoring/" target="_blank" rel="external">monitoring documentation</a></p>
+<p>对比一体化应用，网关和微服务监视器提供了一些额外的功能，可以帮助你有效地监控微服务集群。例如查看日志，它可以具体到日志对于的应用程序的名称，主机，端口和Eureka ServiceId ，这样可以让你追踪到具体的service。此外，JHipster Console带有默认的仪表板，让你在同一时间查看所有的服务。</p>
+<h2 id="生产环境"><a href="#生产环境" class="headerlink" title=" 生产环境"></a><a name="production"></a> 生产环境</h2><h3 id="部署到-Docker-Swarm"><a href="#部署到-Docker-Swarm" class="headerlink" title=" 部署到 Docker Swarm"></a><a name="docker_swarm"></a> 部署到 Docker Swarm</h3><p>Docker Swarm (Docker 集群管理工具) 底层使用的API 和Docker Machine (Docker管理工具) 是一样的，所以使用Docker Swarm 发布微服务应用和在你本机上发布是一样的。更多关于Docker和Docker Swarm的文档请参考 <a href="https://jhipster.github.io/docker-compose/" target="_blank" rel="external">Docker Compose documentation </a>。</p>
+<h3 id="部署到-CloudFoundry"><a href="#部署到-CloudFoundry" class="headerlink" title=" 部署到 CloudFoundry"></a><a name="cloudfoundry"></a> 部署到 CloudFoundry</h3><p>使用 <a href="https://jhipster.github.io/cloudfoundry/" target="_blank" rel="external">CloudFoundry sub-generator</a> 搭建为微服务的应用原理和之前是一样的，只是你需要部署更多的应用：</p>
+<ul>
+<li><p>使 sub-generator 发布你的 JHipster Registry</p>
+</li>
+<li><p>拿到JHipster Registry 的url,你需要在你的其它应用里面配置这个地址：</p>
+<ul>
+<li><p>在 <code>bootstrap-prod.yml</code> 文件中，设置 <code>spring.cloud.config.uri</code> 值为 <code>http://&lt;your_jhipster_registry_url&gt;/config/</code></p>
+</li>
+<li><p>在 <code>application-prod.yml</code> 文件中，设置 <code>eureka.client.serviceUrl.defaultZone</code> 值为 <code>http://&lt;your_jhipster_registry_url&gt;/eureka/</code></p>
+</li>
+</ul>
+</li>
+<li><p>发布你的网关应用和微服务应用</p>
+</li>
+<li><p>拓展你的应用</p>
+</li>
+</ul>
+<p>一个重要的点是 JHipster Registry 默认是不受保护的，而微服务应用也不应该直接通过外网访被访问到，用户只有通过网关才能访问到你的服务。针对此问题有两种解决方案：</p>
+<ul>
+<li>通过使用特定的路由来保护你的的 Cloud Foundry。</li>
+</ul>
+<ul>
+<li>全部应用都使用 Https，并通过使用 Spring Security 的 basic authentication 来保护你的 JHipster Registry。</li>
+</ul>
+<h3 id="部署到-Heroku"><a href="#部署到-Heroku" class="headerlink" title="部署到 Heroku"></a><a name="heroku"></a>部署到 Heroku</h3><p>使用 <a href="https://jhipster.github.io/cloudfoundry/" target="_blank" rel="external">Heroku sub-generator</a> 的原理和之前也是是一样的，只是你需要部署更多的应用：</p>
+<p>通过下面的按钮可以在 Heroku 上一键部署 JHipster Registry：</p>
+<p><a href="https://dashboard-preview.heroku.com/new?&amp;template=https%3A%2F%2Fgithub.com%2Fjhipster%2Fjhipster-registry" target="_blank" rel="external"><img src="https://camo.githubusercontent.com/c0824806f5221ebb7d25e559568582dd39dd1170/68747470733a2f2f7777772e6865726f6b7563646e2e636f6d2f6465706c6f792f627574746f6e2e706e67" alt="Deploy to Heroku"></a></p>
+<p>为了保障注册中心的安全，请参考 <a href="https://jhipster.github.io/heroku/" target="_blank" rel="external">Heroku sub-generator documentation</a> </p>
+<p>在获取注册中心的地址后，你的全部应用都要在 application-prod.yml 中配置这个地址：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="attr">eureka:</span></div><div class="line"><span class="attr">    instance:</span></div><div class="line"><span class="attr">        hostname:</span> &lt;your_jhipster_registry_url&gt;.herokuapp.com</div><div class="line"><span class="attr">        non-secure-port:</span> <span class="number">80</span></div><div class="line"><span class="attr">        prefer-ip-address:</span> <span class="literal">false</span></div></pre></td></tr></table></figure>
+<p>配置好后你就可以部署你的网关应用和微服务应用。使用 Heroku sub-generator 会询问你 JHipster Registry 的地址，这个可以让你的应用程序直接到 Spring Cloud Config server 上获取它们的配置。</p>
+<p><strong>注意</strong> 以上的配置是通过http协议，但是在生产环境上，建议使用HTTPS来连接到你的JHipster Registry。因为管理员的密码是通过HTTP来进行传输的，所以极力建议通过HTTPS来加密通信通道。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;!--
+# &lt;i class=&quot;fa fa-sitemap&quot;&gt;&lt;/i&gt; 使用JHipster开发微服务
+
+点此查看 [原文地址](https://jhipster.github.io/microservices-architecture/#production)
+## 摘要
+
+1. [微服务架构 vs 一体化架构](#microservices_vs_monolithic)
+2. [概览](#overview)
+3. [JHipster 的API 网关](#gateway)
+  * [使用网关进行HTTP路由](#http_routing)
+  * [安全](#security)
+  * [自动生成文档](#documentation)
+  * [请求速率限制](#rate_limiting)
+  * [访问控制策略](#acl)
+4. [JHipster 的注册中心](#registry)
+  * [JHipster 注册中心概览](#registry_overview)
+  * [JHipster 注册中心的安全保障](#securing_registry)
+  * [在JHipster 上注册你的应用](#registry_app_configuration)
+5. [创建微服务应用](#microservices)
+  * [为微服务应用生成实体对象](#generating_entities)
+  * [使用HazelCast做分布式缓存](#hazelcast)
+  * [不带数据库的微服务应用](#no_database)
+6. [使用 Docker Compose](#docker_compose)
+7. [使用Jhispter Console 和ELK技术栈来监控服务](#monitoring)
+8. [生产环境](#production)
+  * [部署到 Docker Swarm](#docker_swarm)
+  * [部署到 CloudFoundry](#cloudfoundry)
+  * [部署到 Heroku](#heroku)
+--&gt;
+&lt;h2 id=&quot;微服务架构-vs-一体化架构&quot;&gt;&lt;a href=&quot;#微服务架构-vs-一体化架构&quot; class=&quot;headerlink&quot; title=&quot; 微服务架构 vs 一体化架构&quot;&gt;&lt;/a&gt;&lt;a name=&quot;microservices_vs_monolithic&quot;&gt;&lt;/a&gt; 微服务架构 vs 一体化架构&lt;/h2&gt;&lt;p&gt;使用 JHipster 生成应用时，第一个问题就是让你选择你要的生成的应用(目前有4个选项)，但实际上你是在两种架构风格里面做选择：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一体化架构，用来创建单独的一个应用，包含前端angular代码和后端spring boot 相关代码，项目中所有代码都在一个应用中。&lt;/li&gt;
+&lt;li&gt;微服务架构，进行了前后端分离，优点是它可以让你很容易的控制单个应用的规模，并处理好这些应用中一些简单细小的问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;相对来说，一体化架构是比较容易上手，官网默认推荐这个，如果是刚接触jhipstert，建议从这个入手，熟悉后，如果项目有要求，则再选择微服务架构应用。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;下面部分则主要讲解下使用JHipster进行微服务架构。&lt;/em&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="微服务 JHipster" scheme="http://yoursite.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1-JHipster/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JHispter实践</title>
+    <link href="http://yoursite.com/2016/07/07/JHispter%E5%AE%9E%E8%B7%B5/"/>
+    <id>http://yoursite.com/2016/07/07/JHispter实践/</id>
+    <published>2016-07-07T03:10:07.000Z</published>
+    <updated>2016-10-09T05:51:38.085Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="JHipster-介绍"><a href="#JHipster-介绍" class="headerlink" title="JHipster 介绍"></a>JHipster 介绍</h3><p>JHipster 是一个Java web的全栈项目，JHipster 的英文意思是 Java 潮人，注意它的前两个字母是大写。他以Spring boot做后台支撑，Angular2 做前端框架，集代码生成，提供多种技术方案选项，从对多种数据库的支持，到 docker 、Kubernetes 等最新技术，它值得每个 Javaer 都去研究的框架。</p>
+<a id="more"></a>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
+<li><p>服务端：<br>Java环境，jdk1.8(里面用到很多java8 的新特性)<br>依赖管理工具：maven 或gradle<br>数据库：mysql 或者 mongodb 、cassandra 、PostgreSQL、Oracle</p>
+</li>
+<li><p>前端：<br>安装Node.js ，npm 包管理器，然后npm 安装下面几个模块：</p>
+</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install </span>-g yo      <span class="comment">## Yeoman ,更新npm install -g  yo </span></div><div class="line">npm <span class="keyword">install </span>-g <span class="keyword">bower </span>   <span class="comment">## Bower  </span></div><div class="line">npm <span class="keyword">install </span>-g gulp     <span class="comment">## gulp</span></div><div class="line">npm <span class="keyword">install </span>-g generator-<span class="keyword">jhipster </span> <span class="comment">##JHipster 生成器 </span></div><div class="line">npm <span class="keyword">install </span>-g <span class="keyword">jhipster-uml </span> <span class="comment">## JHipster uml 工具</span></div><div class="line">npm <span class="keyword">install </span>-g generator-<span class="keyword">jhipster </span>to update  <span class="comment">## 更新JHipster 生成器</span></div></pre></td></tr></table></figure>
+<h3 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h3><ul>
+<li>生成项目<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">yo</span> <span class="selector-tag">jhipster</span></div><div class="line"><span class="selector-tag">yo</span> <span class="selector-tag">jhipster</span><span class="selector-pseudo">:import-jdl</span> <span class="selector-tag">your-jdl-file</span><span class="selector-class">.jh</span></div><div class="line"><span class="selector-tag">yo</span> <span class="selector-tag">jhipster</span><span class="selector-pseudo">:server</span></div><div class="line"><span class="selector-tag">yo</span> <span class="selector-tag">jhipster</span><span class="selector-pseudo">:client</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>后面会有16个问题，其中第一个问题的选项：</p>
+<pre><code>* monolithic     application   #单体架构应用
+* microservice  application   #微服务应用
+* microservice  gateway       #微服务网关
+* [beat] JHipster UAA server  #(使用OAuth2 作为认证机制的微服务)
+</code></pre><p>这里我们它推荐我们先选择单页应用，比较简单入手，适合创建小型 Web 站点。</p>
+<ul>
+<li>项目配置,后台主要是spring boot 相关配置，其中 metrics 和 logstash 都是关闭的。</li>
+</ul>
+<h3 id="项目启动"><a href="#项目启动" class="headerlink" title="项目启动"></a>项目启动</h3><ul>
+<li>服务端 根据构建工具运行启动命令<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mvn spring-boot:<span class="keyword">run</span><span class="bash"> -Pprod</span></div><div class="line">gradle bootRun</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>前端 gulp<br>gulp 是一个前端构建打包工具。<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gulp        <span class="comment">#默认是运行gulp server ,可以开启热加载模式，用作在开发模式下。</span></div><div class="line">gulp <span class="keyword">build </span> <span class="comment">#在target下生成被压缩过后的www 镜头资源文件，这可以用于生产环境。</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>测试框架</p>
+<ul>
+<li><p>gatling:Gatling: 基于Scala、Akka和Netty的开源负载测试框架</p>
+</li>
+<li><p>protractor:是为Angular JS应用量身打造的端到端测试框架。</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;JHipster-介绍&quot;&gt;&lt;a href=&quot;#JHipster-介绍&quot; class=&quot;headerlink&quot; title=&quot;JHipster 介绍&quot;&gt;&lt;/a&gt;JHipster 介绍&lt;/h3&gt;&lt;p&gt;JHipster 是一个Java web的全栈项目，JHipster 的英文意思是 Java 潮人，注意它的前两个字母是大写。他以Spring boot做后台支撑，Angular2 做前端框架，集代码生成，提供多种技术方案选项，从对多种数据库的支持，到 docker 、Kubernetes 等最新技术，它值得每个 Javaer 都去研究的框架。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="JHipster" scheme="http://yoursite.com/tags/JHipster/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MongoDB 笔记</title>
+    <link href="http://yoursite.com/2016/06/30/MongoDB-%E7%AC%94%E8%AE%B0/"/>
+    <id>http://yoursite.com/2016/06/30/MongoDB-笔记/</id>
+    <published>2016-06-30T09:54:13.000Z</published>
+    <updated>2016-10-13T09:07:48.686Z</updated>
+    
+    <content type="html"><![CDATA[<p>MongoDB 最近几年，以其独特的性能优势，及独特的文档型数据结构，占有了大部分 Nosql 市场，因此，熟悉掌握 MongoDB 的使用，对于开发者显得十分必要。</p>
+<a id="more"></a>
+<h2 id="MongoDB-的安装"><a href="#MongoDB-的安装" class="headerlink" title="MongoDB 的安装"></a>MongoDB 的安装</h2><ul>
+<li><p>windows 下安装，<a href="http://www.runoob.com/mongodb/mongodb-window-install.html" target="_blank" rel="external">参见此教程</a></p>
+</li>
+<li><p>将其添加到系统服务，在 cmd 系统管理员模式下运行下面命令(路径按实际情况改动)</p>
+</li>
+</ul>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">mongod.</span><span class="string">exe </span> <span class="built_in">--logpath</span> <span class="string">"C:\Program Files\MongoDB\data\log\mongo.log"</span> <span class="built_in">--logappend</span> <span class="built_in">--dbpath</span> <span class="string">"C:\Program Files\MongoDB\data\db"</span> <span class="built_in">--port</span> <span class="string">27017 </span><span class="built_in">--serviceName</span> <span class="string">"mongodb"</span> <span class="built_in">--serviceDisplayName</span> <span class="string">"mongodb"</span> <span class="built_in">--install</span></div></pre></td></tr></table></figure>
+<ul>
+<li>设置开机自启动</li>
+</ul>
+<p>cmd 下运行services.msc 找到mongo 后设置自动启动</p>
+<ul>
+<li>连接远程的mongo</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">mongo</span> <span class="number">192.168.111.200:27017</span>/mdoctor -u mdoctor -p password</div></pre></td></tr></table></figure>
+<h2 id="MongoDB-的数据结构以及底层"><a href="#MongoDB-的数据结构以及底层" class="headerlink" title="MongoDB 的数据结构以及底层"></a>MongoDB 的数据结构以及底层</h2><p>存储格式：面向集合存储，一个collection 相当于mysql中的一个table，底层文件存储格式为BSON（一种JSON的扩展），Binary JSON </p>
+<h2 id="MongoDB-的业务场景"><a href="#MongoDB-的业务场景" class="headerlink" title="MongoDB 的业务场景"></a>MongoDB 的业务场景</h2><p> mongodb的主要目标是在键/值存储方式（提供了高性能和高度伸缩性）以及传统的RDBMS系统（丰富的功能）架起一座桥梁，集两者的优势于一身。mongo适用于以下场景：</p>
+<ul>
+<li><p>网站数据：mongo非常适合实时的插入，更新与查询，并具备网站实时数据存储所需的复制及高度伸缩性。</p>
+</li>
+<li><p>缓存：由于性能很高，mongo也适合作为信息基础设施的缓存层。在系统重启之后，由mongo搭建的持久化缓存可以避免下层的数据源过载。</p>
+</li>
+<li><p>大尺寸、低价值的数据，比如评论、回复、模板数据。使用传统的关系数据库存储一些数据时可能会比较贵，在此之前，很多程序员往往会选择传统的文件进行存储。</p>
+</li>
+<li><p>高伸缩性的场景：mongo非常适合由数十或者数百台服务器组成的数据库。</p>
+</li>
+<li><p>用于对象及JSON数据的存储：mongo的BSON数据格式非常适合文档格式化的存储及查询。</p>
+</li>
+</ul>
+<p>不适合的场景：</p>
+<ul>
+<li>高度事物性的系统：例如银行或会计系统。传统的关系型数据库目前还是更适用于需要大量原子性复杂事务的应用程序</li>
+</ul>
+<h2 id="MongoDB-常用命令"><a href="#MongoDB-常用命令" class="headerlink" title="MongoDB 常用命令"></a>MongoDB 常用命令</h2><ul>
+<li><p>查看数据库：show databases;</p>
+</li>
+<li><p>使用数据库：use db_name;</p>
+</li>
+<li><p>查看有哪些表，或者是集合：show collections|show table;</p>
+</li>
+<li><p>查看集合，返回的是一个数组：db.getCollections();</p>
+</li>
+<li><p>创建集合，db.createCollection(“nsmr”，”一些可选参数,可以不填”)</p>
+</li>
+<li><p>在集合中插入数据 db.sites.insert({name:”itbilu.com”})</p>
+</li>
+<li><p>重新命名集合类 db.COLLECTION_NAME.renameCollection(“NEW_NAME”)</p>
+</li>
+<li><p>删除集合类 db.COLLECTION_NAME.drop();</p>
+</li>
+<li><p>查询当前集合的数据条数：db.yourColl.count();</p>
+</li>
+<li><p>查看数据空间大小:db.userInfo.dataSize();</p>
+</li>
+<li><p>得到当前聚集集合所在的数据库:db.userInfo.getDB();</p>
+</li>
+<li><p>得到当前聚集的状态，可以查看到当前collection 的size、count啥的：db.userInfo.stats();</p>
+</li>
+<li><p>得到聚集集合总大小：db.userInfo.totalSize();</p>
+</li>
+<li><p>collection重命名：db.userInfo.renameCollection(“users”);</p>
+</li>
+<li><p>删除当前collection：db.userInfo.drop();</p>
+</li>
+</ul>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><ul>
+<li><p>查询所有记录：db.userInfo.find();<br>相当于：select * from userInfo;</p>
+</li>
+<li><p>查询去掉后的当前聚集集合中的某列的重复数据：db.userInfo.distinct(“name”);<br>相当于：select distict name from userInfo;</p>
+</li>
+<li><p>查询age = 22的记录：db.userInfo.find({“age”: 22});<br>相当于： select * from userInfo where age = 22;</p>
+</li>
+<li><p>查询age &gt; 22的记录<br>db.userInfo.find({age: {$gt: 22}});<br>相当于：select * from userInfo where age &gt; 22;</p>
+</li>
+<li><p>查询age &lt; 22的记录<br>db.userInfo.find({age: {$lt: 22}});<br>相当于：select * from userInfo where age &lt; 22;</p>
+</li>
+<li><p>查询age &gt;= 25的记录<br>db.userInfo.find({age: {$gte: 25}});<br>相当于：select * from userInfo where age &gt;= 25;</p>
+</li>
+<li><p>查询age &lt;= 25的记录<br>db.userInfo.find({age: {$lte: 25}});</p>
+</li>
+<li><p>查询age &gt;= 23 并且 age &lt;= 26<br>db.userInfo.find({age: {$gte: 23, $lte: 26}});</p>
+</li>
+<li><p>查询name中包含 mongo的数据<br>db.userInfo.find({name: /mongo/});<br>select * from userInfo where name like ‘%mongo%’;</p>
+</li>
+<li><p>查询name中以mongo开头的<br>db.userInfo.find({name: /^mongo/});<br>select * from userInfo where name like ‘mongo%’;</p>
+</li>
+<li><p>查询之正则<br>db.userInfo..find({name:{$regex:/aaa/}})</p>
+</li>
+<li><p>查询指定列name、age数据<br>db.userInfo.find({}, {name: 1, age: 1});<br>相当于：select name, age from userInfo;<br>当然name也可以用true或false,当用ture的情况下河name:1效果一样，如果用false就是排除name，显示name以外的列信息。</p>
+</li>
+<li><p>查询指定列name、age数据, age &gt; 25<br>db.userInfo.find({age: {$gt: 25}}, {name: 1, age: 1});<br>相当于：select name, age from userInfo where age &gt; 25;</p>
+</li>
+<li><p>按照年龄排序<br>升序：db.userInfo.find().sort({age: 1});<br>降序：db.userInfo.find().sort({age: -1});</p>
+</li>
+<li><p>查询name = zhangsan, age = 22的数据<br>db.userInfo.find({name: ‘zhangsan’, age: 22});<br>相当于：select * from userInfo where name = ‘zhangsan’ and age = ‘22’;</p>
+</li>
+<li><p>查询前5条数据<br>db.userInfo.find().limit(5);<br>相当于：select top 5 * from userInfo;</p>
+</li>
+<li><p>查询10条以后的数据<br>db.userInfo.find().skip(10);</p>
+</li>
+<li><p>查询在5-10之间的数据<br>db.userInfo.find().limit(10).skip(5);<br>可用于分页，limit是pageSize，skip是第几页*pageSize</p>
+</li>
+<li><p>or与 查询<br>db.userInfo.find({$or: [{age: 22}, {age: 25}]});<br>相当于：select * from userInfo where age = 22 or age = 25;</p>
+</li>
+</ul>
+<ul>
+<li><p>in 查询<br>db.userInfo.find({_id:({$in:[20368,20369]})})</p>
+</li>
+<li><p>查询第一条数据<br>db.userInfo.findOne();<br>相当于：select top 1 * from userInfo;<br>db.userInfo.find().limit(1);</p>
+</li>
+<li><p>查询某个结果集的记录条数<br>db.userInfo.find({age: {$gte: 25}}).count();<br>相当于：select count(*) from userInfo where age &gt;= 20;</p>
+</li>
+<li><p>按照某列进行排序<br>db.userInfo.find({sex: {$exists: true}}).count();<br>相当于：select count(sex) from userInfo;</p>
+</li>
+</ul>
+<h3 id="索引相关"><a href="#索引相关" class="headerlink" title="索引相关"></a>索引相关</h3><p>db.userInfo.ensureIndex({name: 1});<br>db.userInfo.ensureIndex({name: 1, ts: -1});</p>
+<p>2、查询当前聚集集合所有索引<br>db.userInfo.getIndexes();</p>
+<p>3、查看总索引记录大小<br>db.userInfo.totalIndexSize();</p>
+<p>4、读取当前集合的所有index信息<br>db.users.reIndex();</p>
+<p>5、删除指定索引<br>db.users.dropIndex(“name_1”);</p>
+<p>6、删除所有索引索引<br>db.users.dropIndexes();</p>
+<h3 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h3><p>db.users.save({name: ‘zhangsan’, age: 25, sex: true});<br>添加的数据的数据列，没有固定，根据添加的数据为准</p>
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><p>db.users.update({age: 25}, {$set: {name: ‘changeName’}}, false, true);<br>相当于：update users set name = ‘changeName’ where age = 25;</p>
+<p>db.users.update({name: ‘Lisi’}, {$inc: {age: 50}}, false, true);<br>相当于：update users set age = age + 50 where name = ‘Lisi’;</p>
+<p>db.users.update({name: ‘Lisi’}, {$inc: {age: 50}, $set: {name: ‘hoho’}}, false, true);<br>相当于：update users set age = age + 50, name = ‘hoho’ where name = ‘Lisi’;</p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>db.users.remove({age: 132});</p>
+<h3 id="查询修改删除"><a href="#查询修改删除" class="headerlink" title="查询修改删除"></a>查询修改删除</h3><p>db.users.findAndModify({<br>    query: {age: {$gte: 25}},<br>    sort: {age: -1},<br>    update: {$set: {name: ‘a2’}, $inc: {age: 2}},<br>    remove: true<br>});</p>
+<p>db.runCommand({ findandmodify : “users”,<br>    query: {age: {$gte: 25}},<br>    sort: {age: -1},<br>    update: {$set: {name: ‘a2’}, $inc: {age: 2}},<br>    remove: true<br>});<br>update 或 remove 其中一个是必须的参数; 其他参数可选。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;MongoDB 最近几年，以其独特的性能优势，及独特的文档型数据结构，占有了大部分 Nosql 市场，因此，熟悉掌握 MongoDB 的使用，对于开发者显得十分必要。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="MongoDB" scheme="http://yoursite.com/tags/MongoDB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java8 新特性概览</title>
+    <link href="http://yoursite.com/2016/06/29/Java8-%E6%96%B0%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://yoursite.com/2016/06/29/Java8-新特性学习/</id>
+    <published>2016-06-29T02:06:29.000Z</published>
+    <updated>2016-10-09T06:23:33.304Z</updated>
+    
+    <content type="html"><![CDATA[<p>Java8  的新特性可以用一本书来描述，这里是笔者通过简单学习后的一些记录，主要涉及到 Java8  的默认接口方法、函数式接口、Lambda 表达式、java 8 新的日期API 和 Java8  新增加的工具类。</p>
+<a id="more"></a>
+<h2 id="Java8-接口默认方法"><a href="#Java8-接口默认方法" class="headerlink" title="Java8 接口默认方法"></a>Java8 接口默认方法</h2><p>引入原因：默认方法允许您添加新的功能到现有库的接口中，并能确保与采用旧版本接口编写的代码的二进制兼容性。</p>
+<p>具体实例：<br>forEach 方法是 jdk 1.8 新增的接口默认方法，正是因为有了默认方法的引入，才不会因为 Iterable 接口中添加了 forEach 方法就需要修改所有 Iterable 接口的实现类，而且forEach 使用了内循环，相对之前的for循环，有以下优点：<br>1、 不一定需要顺序处理List中的元素，顺序可以不确定<br>2、可以并行处理，充分利用多核CPU的优势<br>3、 有利于JIT编译器对代码进行优化</p>
+<p>除了默认方法，Java8  还在允许在接口中定义静态方法。</p>
+<h2 id="Java8-函数式接口"><a href="#Java8-函数式接口" class="headerlink" title="Java8 函数式接口"></a>Java8 函数式接口</h2><p>一个接口，如果只有一个显式声明的抽象方法，那么它就是一个函数接口。一般用@FunctionalInterface标注出来（也可以不标）。举例如下：</p>
+<pre><code>@FunctionalInterface
+public interface Runnable { void run(); }
+public interface Callable&lt;V&gt; { V call() throws Exception; }
+public interface ActionListener { void actionPerformed(ActionEvent e); }
+public interface Comparator&lt;T&gt; { int compare(T o1, T o2); boolean equals(Object obj); }
+</code></pre><p>Java8 中新加了个java.util.function包，里面添加了Function, Supplier, Consumer, Predicate等函数式接口，这些接口经常和 Stream 结合着用:</p>
+<ul>
+<li>Function<k,t>  K 是输入类型，T是输出类型，其实就是一个函数的封装</k,t></li>
+<li>Predicate<t> -T作为输入，返回的boolean值作为输出，常用作filter</t></li>
+<li>Consumer<t> - T作为输入，执行某种动作但没有返回值</t></li>
+</ul>
+<h2 id="Java8-之-Lambda-表达式"><a href="#Java8-之-Lambda-表达式" class="headerlink" title="Java8  之 Lambda 表达式"></a>Java8  之 Lambda 表达式</h2><p>java是一门面向对象的语言，在Java8之前，它也是声明式编程语言，而 Java8 中 Lambda表达式的引入，使得它在写法上具有了函数式编程的特点。但它仍然是面向对象的，因为在Java8中的编写 Lambda 表达式，实质上定义了一个匿名方法，而这个方法的后面，至少有声明一个函数接口。</p>
+<p>关于 Lambda 表达式，推荐书籍《精通lambda表达式：Java多核编程》</p>
+<p>另外有了 Lambda 表达式，我们可以<a href="http://www.importnew.com/14841.html" target="_blank" rel="external">不要在使用循环了</a></p>
+<h2 id="Lambda-和-Stream"><a href="#Lambda-和-Stream" class="headerlink" title="Lambda  和 Stream"></a>Lambda  和 Stream</h2><p>Java8  中的 Stream是对集合（Collection）对象功能的增强，它专注于对集合对象进行各种非常便利、高效的聚合操作（aggregate operation），或者大批量数据操作 (bulk data operation)。Lambda 表达式也是一种语法糖，在编写上给我提供了方便。Java8 中引入的 Strema，则紧密结合了 Lambda 表达式，充分的发挥了它的便捷性。我们可能在学习 Stream 的同时熟悉 Lambda 表达式。</p>
+<p>Stream 表示能应用在一组元素上一次执行的操作序列。Stream 操作分为中间操作或者最终操作两种，最终操作返回一特定类型的计算结果，而中间操作返回Stream本身，这样我们就可以将多个操作依次串起来。</p>
+<p>关于 Stream 的学习，推荐IBM 的<a href="http://www.ibm.com/developerworks/cn/java/j-lo-Java8streamapi/" target="_blank" rel="external">Java8  中的 Streams API 详解</a>。</p>
+<h2 id="日期时间API"><a href="#日期时间API" class="headerlink" title="日期时间API"></a>日期时间API</h2><p>Java8 使用了 <strong>JSR 310</strong> 规范，新增了java.time包。<br>在Java8 版之前，如果我们想格式化日期，必须使用SimpleDateFormat类，用它格式化输入的日期类。而Java8 引入了以下的新日期时间类：<br>LocalTime、LocalDate 、LocalDateTime、OffsetDate、OffsetTime、OffsetDateTime</p>
+<h2 id="工具类"><a href="#工具类" class="headerlink" title="工具类"></a>工具类</h2><ul>
+<li>并行数组排序<br>Java8 在java.util.Arrays类中新增了并行排序功能，能够更充分地利用多线程机制。</li>
+</ul>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Arrays;</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> ParallelSort &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</div><div class="line">        <span class="keyword">int</span> arr[] = &#123;<span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">5</span>&#125;;</div><div class="line">        Arrays.parallelSort(arr);</div><div class="line">        <span class="built_in">for</span>(<span class="keyword">int</span> i : arr)&#123;</div><div class="line">            System.out.<span class="built_in">print</span>(i + <span class="string">" "</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>java.util.Optional类<br>Java8 在java.util包中新增了Optional类，Optional 类是一个可以包含或不可以包含非空值的容器对象。主要用在判断对象空指针，提供了 orElseThrow、orElse 和 orElseGet 等方法。Optional 类更像是一个容器，它保存一个类型的值或是null值。通过使用 Optional 类的 isPresent() 方法，我们可以检查指定的对象是否为空。更多方法参考 <a href="http://www.importnew.com/6675.html" target="_blank" rel="external">Java8  Optional类深度解析</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Java8  的新特性可以用一本书来描述，这里是笔者通过简单学习后的一些记录，主要涉及到 Java8  的默认接口方法、函数式接口、Lambda 表达式、java 8 新的日期API 和 Java8  新增加的工具类。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Java8" scheme="http://yoursite.com/tags/Java8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一行命令启动Web</title>
+    <link href="http://yoursite.com/2016/05/21/%E4%B8%80%E8%A1%8C%E5%91%BD%E4%BB%A4%E5%90%AF%E5%8A%A8Web/"/>
+    <id>http://yoursite.com/2016/05/21/一行命令启动Web/</id>
+    <published>2016-05-21T02:29:41.000Z</published>
+    <updated>2016-10-09T06:24:37.396Z</updated>
+    
+    <content type="html"><![CDATA[<p>经常会遇到要在某一个目录下启动一个 Web的情景，有很多种实现方式。</p>
+<p>其中我推荐 使用 Node.js 这种方案：</p>
+<a id="more"></a>
+<p>使用 Node.js 安装http-server。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hs -o -<span class="selector-tag">p</span> <span class="number">8000</span></div></pre></td></tr></table></figure></p>
+<p>以下，是我有用到过的命令<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">## python</span></div><div class="line">python2 -m SimpleHTTPServer <span class="number">8000</span></div><div class="line"></div><div class="line"><span class="meta">## python3.x</span></div><div class="line">python -m http.<span class="keyword">server</span> <span class="number">8000</span></div><div class="line"></div><div class="line"><span class="meta">## node.js</span></div><div class="line">npm install -g http-<span class="keyword">server</span></div><div class="line">http-<span class="keyword">server</span> -p <span class="number">9000</span></div><div class="line">hs -p <span class="number">9000</span>   <span class="meta">## 上面的还可以简写 为</span></div><div class="line">hs -help    <span class="meta">## 更多用法</span></div><div class="line"></div><div class="line"><span class="meta">## php(&gt;5.4)</span></div><div class="line">php -S <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8000</span></div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;经常会遇到要在某一个目录下启动一个 Web的情景，有很多种实现方式。&lt;/p&gt;
+&lt;p&gt;其中我推荐 使用 Node.js 这种方案：&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="小技巧" scheme="http://yoursite.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo小计</title>
+    <link href="http://yoursite.com/2016/01/27/Hexo%E5%B0%8F%E8%AE%A1/"/>
+    <id>http://yoursite.com/2016/01/27/Hexo小计/</id>
+    <published>2016-01-27T04:56:29.000Z</published>
+    <updated>2016-10-09T06:06:49.724Z</updated>
+    
+    <content type="html"><![CDATA[<p>因为选择了技术这条路，也选择了通过 Hexo 来写博客，所以，这篇小记，用来记录笔者在使用 Hexo 的常用命令，以及遇到的一些问题。</p>
+<a id="more"></a>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">new</span> <span class="string">"postName"</span> 		<span class="meta">#新建文章</span></div><div class="line">hexo <span class="keyword">new</span> page <span class="string">"pageName"</span>	<span class="meta">#新建页面</span></div><div class="line">hexo generate		<span class="meta">#生成静态页面至public目录</span></div><div class="line">hexo <span class="keyword">server</span>		<span class="meta">#开启预览访问端口（默认端口4000，'ctrl + c'关闭server）</span></div><div class="line">hexo deploy		<span class="meta">#将.deploy目录部署到GitHub</span></div><div class="line">hexo help 		<span class="meta">#查看帮助</span></div><div class="line">hexo version		<span class="meta">#查看Hexo的版本</span></div><div class="line">hexo deploy -g 		<span class="meta">#生成加部署</span></div><div class="line">hexo <span class="keyword">server</span> -g		<span class="meta">#生成加预览</span></div></pre></td></tr></table></figure>
+<h2 id="命令的简写"><a href="#命令的简写" class="headerlink" title="命令的简写"></a>命令的简写</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo n == hexo <span class="keyword">new</span></div><div class="line">hexo g == hexo <span class="keyword">generate</span></div><div class="line">hexo s == hexo server</div><div class="line">hexo d == hexo deploy</div></pre></td></tr></table></figure>
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><ul>
+<li>下载主题放到 themes 文件夹中，在 _config.ym 中修改 theme 的名字</li>
+</ul>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><ul>
+<li>ERROR Deployer not found: git 或者 ERROR Deployer not found: github</li>
+<li>解决方法： npm install hexo-deployer-git –save </li>
+<li>deploy 里面的 type 值为 git</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;因为选择了技术这条路，也选择了通过 Hexo 来写博客，所以，这篇小记，用来记录笔者在使用 Hexo 的常用命令，以及遇到的一些问题。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="博客 Hexo" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2-Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vim常用快捷键</title>
+    <link href="http://yoursite.com/2016/01/27/Vim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    <id>http://yoursite.com/2016/01/27/Vim常用快捷键/</id>
+    <published>2016-01-27T04:56:29.000Z</published>
+    <updated>2016-10-09T03:54:28.550Z</updated>
+    
+    <content type="html"><![CDATA[<p>学习 Vim ，从它的快捷方式开始。。。<br><a id="more"></a></p>
+<h1 id="一般模式下的快捷键"><a href="#一般模式下的快捷键" class="headerlink" title="一般模式下的快捷键"></a>一般模式下的快捷键</h1><hr>
+<h2 id="光标定位"><a href="#光标定位" class="headerlink" title="光标定位"></a>光标定位</h2><hr>
+<h3 id="上下左右记忆技巧-非方向键控制"><a href="#上下左右记忆技巧-非方向键控制" class="headerlink" title="上下左右记忆技巧(非方向键控制)"></a>上下左右记忆技巧(非方向键控制)</h3><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ｋ</td>
+<td>　上移　　　　　ｋ</td>
+</tr>
+<tr>
+<td>ｈ</td>
+<td>　左移 　　　h　　　l</td>
+</tr>
+<tr>
+<td>ｉ</td>
+<td>　右移　　　　　j</td>
+</tr>
+<tr>
+<td>ｊ</td>
+<td>　下移</td>
+</tr>
+</tbody>
+</table>
+<p><strong>tips:</strong> 先输数字n,再输入命令，表示移动n行或n个字符</p>
+<hr>
+<h3 id="行移动"><a href="#行移动" class="headerlink" title="行移动"></a>行移动</h3><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GG</td>
+<td>移动到最后一行</td>
+</tr>
+<tr>
+<td>gg</td>
+<td>移动到第一行</td>
+</tr>
+<tr>
+<td>↑ 或 k 或 ctrl+p</td>
+<td>向上移动一行</td>
+</tr>
+<tr>
+<td>↓ + 或Enter 或 j 或 Ctrl+n</td>
+<td>向下移动一行</td>
+</tr>
+<tr>
+<td>nj</td>
+<td>光标向下移动n行</td>
+</tr>
+<tr>
+<td>nk</td>
+<td>光标向上移动n行</td>
+</tr>
+<tr>
+<td>nG</td>
+<td>移动到第行(先输数字，观察右下角，再大写G)</td>
+</tr>
+<tr>
+<td>H/M/L</td>
+<td>当前屏幕的header/middle/last 行</td>
+</tr>
+<tr>
+<td>0/$ 或 home/end</td>
+<td>行首/行尾</td>
+</tr>
+<tr>
+<td>*/#</td>
+<td>光标跳到下/上一个光标所在单词</td>
+</tr>
+</tbody>
+</table>
+<h3 id="单词移动"><a href="#单词移动" class="headerlink" title="单词移动"></a>单词移动</h3><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W w</td>
+<td>移动到下一个单词开头</td>
+</tr>
+<tr>
+<td>E e</td>
+<td>移动到下一个单词结尾</td>
+</tr>
+<tr>
+<td>B b</td>
+<td>倒退到上一个单词开头</td>
+</tr>
+</tbody>
+</table>
+<p><strong>tips:</strong> 大写会忽略标点一同，也可以使用数字来移动多个单词</p>
+<h3 id="翻页操作"><a href="#翻页操作" class="headerlink" title="翻页操作"></a>翻页操作</h3><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>翻页操作</td>
+</tr>
+<tr>
+<td>ctrl+b/ctrl+p 或Page up/down</td>
+<td>上/下一屏(back/forward)</td>
+</tr>
+<tr>
+<td>翻半页操作</td>
+</tr>
+<tr>
+<td>ctrl+d</td>
+<td>向下翻半页(down)</td>
+</tr>
+<tr>
+<td>ctrl+u</td>
+<td>向上翻半页操作(up)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>``</td>
+<td>光标回到上次的位置</td>
+</tr>
+<tr>
+<td>*/#</td>
+<td>光标跳到下/上一个光标所在单词</td>
+</tr>
+</tbody>
+</table>
+<p><strong>tips:</strong>   上面几个键前面加上数字n可以指定移动n行或者n个字符</p>
+<hr>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字符删除</td>
+</tr>
+<tr>
+<td>x</td>
+<td>删除光标所在字符</td>
+</tr>
+<tr>
+<td>X</td>
+<td>删除光标所在前一个字符</td>
+</tr>
+<tr>
+<td>单词删除</td>
+</tr>
+<tr>
+<td>dw</td>
+<td>删除到下一个单词开头</td>
+</tr>
+<tr>
+<td>de</td>
+<td>删除到本单词末尾</td>
+</tr>
+<tr>
+<td>dE</td>
+<td>删除到本单词末尾包括标点在内</td>
+</tr>
+<tr>
+<td>db</td>
+<td>删除到前一个单词</td>
+</tr>
+<tr>
+<td>dB</td>
+<td>删除到前一个单词包括标点在内</td>
+</tr>
+<tr>
+<td>删除多个字符</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>删除整行</td>
+</tr>
+<tr>
+<td>d$</td>
+<td>删除光标位置到本行结尾</td>
+</tr>
+<tr>
+<td>d0</td>
+<td>删除光标位置到本行开头</td>
+</tr>
+<tr>
+<td>删除全部</td>
+</tr>
+<tr>
+<td>ggdG</td>
+<td>从第一行删除到末尾</td>
+</tr>
+<tr>
+<td>:%d</td>
+<td>命令行模式下删除，比较强大</td>
+</tr>
+</tbody>
+</table>
+<p><strong>tips:</strong> 结合移动的快捷键来记忆</p>
+<hr>
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>单个字符替换</td>
+</tr>
+<tr>
+<td>R</td>
+<td>连续替换</td>
+</tr>
+<tr>
+<td>~</td>
+<td>更改大小写</td>
+</tr>
+<tr>
+<td>c</td>
+<td>w</td>
+<td>从光标处修改到单词结尾</td>
+</tr>
+<tr>
+<td>cb</td>
+<td>从光标处修改到单词开头</td>
+</tr>
+<tr>
+<td>c</td>
+<td>$</td>
+<td>从光标修改到本行末尾</td>
+</tr>
+<tr>
+<td>C</td>
+<td>功能同上</td>
+</tr>
+<tr>
+<td>c0</td>
+<td>从光标修改到本行开头</td>
+</tr>
+<tr>
+<td>cc</td>
+<td>删除整行从头修改</td>
+</tr>
+<tr>
+<td>S</td>
+<td>功能同上</td>
+</tr>
+<tr>
+<td>s</td>
+<td>删除光标所在位置的字符，然后插入</td>
+</tr>
+</tbody>
+</table>
+<h2 id="复制黏贴"><a href="#复制黏贴" class="headerlink" title="复制黏贴"></a>复制黏贴</h2><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>p</td>
+<td>黏贴</td>
+</tr>
+<tr>
+<td>复制(y+一些移动的快捷键)</td>
+</tr>
+<tr>
+<td>y0</td>
+<td>复制到行首</td>
+</tr>
+<tr>
+<td>y$</td>
+<td>复制到行末</td>
+</tr>
+<tr>
+<td>yy</td>
+<td>复制整行</td>
+</tr>
+<tr>
+<td>yH</td>
+<td>从当前行复制到屏幕顶端</td>
+</tr>
+<tr>
+<td>yL</td>
+<td>从当前行复制到屏幕低端</td>
+</tr>
+<tr>
+<td>ynl</td>
+<td>向右复制n个字符</td>
+</tr>
+<tr>
+<td>ynh</td>
+<td>向左复制n个字符</td>
+</tr>
+<tr>
+<td>ynw</td>
+<td>向前复制n个单词</td>
+</tr>
+<tr>
+<td>ynb</td>
+<td>向后复制n个单词</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="恢复重做"><a href="#恢复重做" class="headerlink" title="恢复重做"></a>恢复重做</h2><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u</td>
+<td>撤消上次命令</td>
+</tr>
+<tr>
+<td>U</td>
+<td>恢复整行</td>
+</tr>
+<tr>
+<td>ctrl+r</td>
+<td>重做</td>
+</tr>
+<tr>
+<td>.</td>
+<td>重复</td>
+</tr>
+<tr>
+<td>(命令行下操作)e！</td>
+<td>全文恢复</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h1><hr>
+<h2 id="保存于退出"><a href="#保存于退出" class="headerlink" title="保存于退出"></a>保存于退出</h2><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>显示行号</td>
+<td>set nu</td>
+</tr>
+<tr>
+<td>强制离开不存储</td>
+<td>q!</td>
+</tr>
+<tr>
+<td>强制保存后离开</td>
+<td>wq!</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="查找与替换"><a href="#查找与替换" class="headerlink" title="查找与替换"></a>查找与替换</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/string</td>
+<td>查找string，默认向下</td>
+</tr>
+<tr>
+<td>?string</td>
+<td>同上，默认向上查找</td>
+</tr>
+</tbody>
+</table>
+<p><strong>tips:</strong> n键跳到下一个，N上一个，另外按/键后，按上下键可以找到以前查找的记录，同样的 ：也有记录</p>
+<p><a href="http://www.cnblogs.com/nerxious/tag/VIM/" target="_blank" rel="external">参考</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学习 Vim ，从它的快捷方式开始。。。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Vim" scheme="http://yoursite.com/tags/Vim/"/>
+    
+  </entry>
+  
+</feed>

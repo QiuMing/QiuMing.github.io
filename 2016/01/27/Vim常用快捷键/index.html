@@ -1,0 +1,417 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="xqMing"><meta name="description" content="学习Vim，从它的快捷方式开始。。。"><meta name="keywords" content="Vim"><title>Vim常用快捷键 · xqMing</title><link rel="icon" href="/favicon.ico"><link rel="canonical" href="http://yoursite.com/2016/01/27/Vim常用快捷键/"><link rel="alternate" href="/atom.xml" title="xqMing"><link rel="stylesheet" href="/fonts/iconfont/iconfont.css"><link rel="stylesheet" href="/css/style.css"></head><body><div id="main"><header><a href="/." class="logo">xqMing</a><ul class="nav"><li class="nav-link"><a href="/" target="_self">Home</a></li><li class="nav-link"><a href="/archives/" target="_self">Archives</a></li><li class="nav-link"><a href="/tags/" target="_self">Tags</a></li><li class="nav-link"><a href="/about/" target="_self">About</a></li></ul></header><section id="container"><article class="post"><h1 class="post-title">Vim常用快捷键</h1><span class="post-time">Jan 27, 2016</span><div id="sidebar" class="post-sidebar"><h3 class="heading">Contents</h3><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一般模式下的快捷键"><span class="toc-text">一般模式下的快捷键</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#光标定位"><span class="toc-text">光标定位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#上下左右记忆技巧-非方向键控制"><span class="toc-text">上下左右记忆技巧(非方向键控制)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#行移动"><span class="toc-text">行移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单词移动"><span class="toc-text">单词移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#翻页操作"><span class="toc-text">翻页操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除"><span class="toc-text">删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改"><span class="toc-text">修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复制黏贴"><span class="toc-text">复制黏贴</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#恢复重做"><span class="toc-text">恢复重做</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#命令模式"><span class="toc-text">命令模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#保存于退出"><span class="toc-text">保存于退出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查找与替换"><span class="toc-text">查找与替换</span></a></li></ol></li></ol></div><div class="post-content"><p>学习 Vim ，从它的快捷方式开始。。。<br><a id="more"></a></p>
+<h1 id="一般模式下的快捷键"><a href="#一般模式下的快捷键" class="headerlink" title="一般模式下的快捷键"></a>一般模式下的快捷键</h1><hr>
+<h2 id="光标定位"><a href="#光标定位" class="headerlink" title="光标定位"></a>光标定位</h2><hr>
+<h3 id="上下左右记忆技巧-非方向键控制"><a href="#上下左右记忆技巧-非方向键控制" class="headerlink" title="上下左右记忆技巧(非方向键控制)"></a>上下左右记忆技巧(非方向键控制)</h3><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ｋ</td>
+<td>　上移　　　　　ｋ</td>
+</tr>
+<tr>
+<td>ｈ</td>
+<td>　左移 　　　h　　　l</td>
+</tr>
+<tr>
+<td>ｉ</td>
+<td>　右移　　　　　j</td>
+</tr>
+<tr>
+<td>ｊ</td>
+<td>　下移</td>
+</tr>
+</tbody>
+</table>
+<p><strong>tips:</strong> 先输数字n,再输入命令，表示移动n行或n个字符</p>
+<hr>
+<h3 id="行移动"><a href="#行移动" class="headerlink" title="行移动"></a>行移动</h3><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GG</td>
+<td>移动到最后一行</td>
+</tr>
+<tr>
+<td>gg</td>
+<td>移动到第一行</td>
+</tr>
+<tr>
+<td>↑ 或 k 或 ctrl+p</td>
+<td>向上移动一行</td>
+</tr>
+<tr>
+<td>↓ + 或Enter 或 j 或 Ctrl+n</td>
+<td>向下移动一行</td>
+</tr>
+<tr>
+<td>nj</td>
+<td>光标向下移动n行</td>
+</tr>
+<tr>
+<td>nk</td>
+<td>光标向上移动n行</td>
+</tr>
+<tr>
+<td>nG</td>
+<td>移动到第行(先输数字，观察右下角，再大写G)</td>
+</tr>
+<tr>
+<td>H/M/L</td>
+<td>当前屏幕的header/middle/last 行</td>
+</tr>
+<tr>
+<td>0/$ 或 home/end</td>
+<td>行首/行尾</td>
+</tr>
+<tr>
+<td>*/#</td>
+<td>光标跳到下/上一个光标所在单词</td>
+</tr>
+</tbody>
+</table>
+<h3 id="单词移动"><a href="#单词移动" class="headerlink" title="单词移动"></a>单词移动</h3><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W w</td>
+<td>移动到下一个单词开头</td>
+</tr>
+<tr>
+<td>E e</td>
+<td>移动到下一个单词结尾</td>
+</tr>
+<tr>
+<td>B b</td>
+<td>倒退到上一个单词开头</td>
+</tr>
+</tbody>
+</table>
+<p><strong>tips:</strong> 大写会忽略标点一同，也可以使用数字来移动多个单词</p>
+<h3 id="翻页操作"><a href="#翻页操作" class="headerlink" title="翻页操作"></a>翻页操作</h3><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>翻页操作</td>
+</tr>
+<tr>
+<td>ctrl+b/ctrl+p 或Page up/down</td>
+<td>上/下一屏(back/forward)</td>
+</tr>
+<tr>
+<td>翻半页操作</td>
+</tr>
+<tr>
+<td>ctrl+d</td>
+<td>向下翻半页(down)</td>
+</tr>
+<tr>
+<td>ctrl+u</td>
+<td>向上翻半页操作(up)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>``</td>
+<td>光标回到上次的位置</td>
+</tr>
+<tr>
+<td>*/#</td>
+<td>光标跳到下/上一个光标所在单词</td>
+</tr>
+</tbody>
+</table>
+<p><strong>tips:</strong>   上面几个键前面加上数字n可以指定移动n行或者n个字符</p>
+<hr>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字符删除</td>
+</tr>
+<tr>
+<td>x</td>
+<td>删除光标所在字符</td>
+</tr>
+<tr>
+<td>X</td>
+<td>删除光标所在前一个字符</td>
+</tr>
+<tr>
+<td>单词删除</td>
+</tr>
+<tr>
+<td>dw</td>
+<td>删除到下一个单词开头</td>
+</tr>
+<tr>
+<td>de</td>
+<td>删除到本单词末尾</td>
+</tr>
+<tr>
+<td>dE</td>
+<td>删除到本单词末尾包括标点在内</td>
+</tr>
+<tr>
+<td>db</td>
+<td>删除到前一个单词</td>
+</tr>
+<tr>
+<td>dB</td>
+<td>删除到前一个单词包括标点在内</td>
+</tr>
+<tr>
+<td>删除多个字符</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>删除整行</td>
+</tr>
+<tr>
+<td>d$</td>
+<td>删除光标位置到本行结尾</td>
+</tr>
+<tr>
+<td>d0</td>
+<td>删除光标位置到本行开头</td>
+</tr>
+<tr>
+<td>删除全部</td>
+</tr>
+<tr>
+<td>ggdG</td>
+<td>从第一行删除到末尾</td>
+</tr>
+<tr>
+<td>:%d</td>
+<td>命令行模式下删除，比较强大</td>
+</tr>
+</tbody>
+</table>
+<p><strong>tips:</strong> 结合移动的快捷键来记忆</p>
+<hr>
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>单个字符替换</td>
+</tr>
+<tr>
+<td>R</td>
+<td>连续替换</td>
+</tr>
+<tr>
+<td>~</td>
+<td>更改大小写</td>
+</tr>
+<tr>
+<td>c</td>
+<td>w</td>
+<td>从光标处修改到单词结尾</td>
+</tr>
+<tr>
+<td>cb</td>
+<td>从光标处修改到单词开头</td>
+</tr>
+<tr>
+<td>c</td>
+<td>$</td>
+<td>从光标修改到本行末尾</td>
+</tr>
+<tr>
+<td>C</td>
+<td>功能同上</td>
+</tr>
+<tr>
+<td>c0</td>
+<td>从光标修改到本行开头</td>
+</tr>
+<tr>
+<td>cc</td>
+<td>删除整行从头修改</td>
+</tr>
+<tr>
+<td>S</td>
+<td>功能同上</td>
+</tr>
+<tr>
+<td>s</td>
+<td>删除光标所在位置的字符，然后插入</td>
+</tr>
+</tbody>
+</table>
+<h2 id="复制黏贴"><a href="#复制黏贴" class="headerlink" title="复制黏贴"></a>复制黏贴</h2><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>p</td>
+<td>黏贴</td>
+</tr>
+<tr>
+<td>复制(y+一些移动的快捷键)</td>
+</tr>
+<tr>
+<td>y0</td>
+<td>复制到行首</td>
+</tr>
+<tr>
+<td>y$</td>
+<td>复制到行末</td>
+</tr>
+<tr>
+<td>yy</td>
+<td>复制整行</td>
+</tr>
+<tr>
+<td>yH</td>
+<td>从当前行复制到屏幕顶端</td>
+</tr>
+<tr>
+<td>yL</td>
+<td>从当前行复制到屏幕低端</td>
+</tr>
+<tr>
+<td>ynl</td>
+<td>向右复制n个字符</td>
+</tr>
+<tr>
+<td>ynh</td>
+<td>向左复制n个字符</td>
+</tr>
+<tr>
+<td>ynw</td>
+<td>向前复制n个单词</td>
+</tr>
+<tr>
+<td>ynb</td>
+<td>向后复制n个单词</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="恢复重做"><a href="#恢复重做" class="headerlink" title="恢复重做"></a>恢复重做</h2><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u</td>
+<td>撤消上次命令</td>
+</tr>
+<tr>
+<td>U</td>
+<td>恢复整行</td>
+</tr>
+<tr>
+<td>ctrl+r</td>
+<td>重做</td>
+</tr>
+<tr>
+<td>.</td>
+<td>重复</td>
+</tr>
+<tr>
+<td>(命令行下操作)e！</td>
+<td>全文恢复</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h1><hr>
+<h2 id="保存于退出"><a href="#保存于退出" class="headerlink" title="保存于退出"></a>保存于退出</h2><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>显示行号</td>
+<td>set nu</td>
+</tr>
+<tr>
+<td>强制离开不存储</td>
+<td>q!</td>
+</tr>
+<tr>
+<td>强制保存后离开</td>
+<td>wq!</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="查找与替换"><a href="#查找与替换" class="headerlink" title="查找与替换"></a>查找与替换</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/string</td>
+<td>查找string，默认向下</td>
+</tr>
+<tr>
+<td>?string</td>
+<td>同上，默认向上查找</td>
+</tr>
+</tbody>
+</table>
+<p><strong>tips:</strong> n键跳到下一个，N上一个，另外按/键后，按上下键可以找到以前查找的记录，同样的 ：也有记录</p>
+<p><a href="http://www.cnblogs.com/nerxious/tag/VIM/" target="_blank" rel="external">参考</a></p>
+</div></article><div class="tags"><a href="/tags/Vim/">Vim</a></div><div class="paginator"><a href="/2016/01/27/Hexo小计/" class="prev"><i class="iconfont icon-left"></i><span> Prev</span></a></div><section id="comments"><div data-thread-key="http://yoursite.com/2016/01/27/Vim常用快捷键/index.html" data-title="Vim常用快捷键" data-url="http://yoursite.com/2016/01/27/Vim常用快捷键/index.html" class="ds-thread"></div><script type="text/javascript">var duoshuoQuery = {short_name: "xqming" };
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();</script></section></section><footer><div class="copyright"><p class="power">Powered by <a href="https://hexo.io/">Hexo</a> and Theme by <a href="https://github.com/ahonn/hexo-theme-even"> Even</a></p><p class="since">&copy;2016<span class="heart"><i class="iconfont icon-heart"></i></span><span class="author">xqMing</span></p></div><label id="back2top"><i class="iconfont icon-up"></i></label></footer></div><script src="/js/zepto.min.js"></script><script src="/js/theme.js"></script></body></html>

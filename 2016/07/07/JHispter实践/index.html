@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="xqMing"><meta name="description" content="JHipster介绍JHipster是一个Javaweb的全栈项目，JHipster的英文意思是Java潮人，注意它的前两个字母是大写。他以Springboot做后台支撑，Angular2做前端框架，集代码生成，提供多种技术方案选项，从对多种数据库的支持，到do"><meta name="keywords" content="JHipster"><title>JHispter实践 · xqMing</title><link rel="icon" href="/favicon.ico"><link rel="canonical" href="http://yoursite.com/2016/07/07/JHispter实践/"><link rel="alternate" href="/atom.xml" title="xqMing"><link rel="stylesheet" href="/fonts/iconfont/iconfont.css"><link rel="stylesheet" href="/css/style.css"></head><body><div id="main"><header><a href="/." class="logo">xqMing</a><ul class="nav"><li class="nav-link"><a href="/" target="_self">Home</a></li><li class="nav-link"><a href="/archives/" target="_self">Archives</a></li><li class="nav-link"><a href="/tags/" target="_self">Tags</a></li><li class="nav-link"><a href="/about/" target="_self">About</a></li></ul></header><section id="container"><article class="post"><h1 class="post-title">JHispter实践</h1><span class="post-time">Jul 7, 2016</span><div id="sidebar" class="post-sidebar"><h3 class="heading">Contents</h3><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#JHipster-介绍"><span class="toc-text">JHipster 介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境准备"><span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目构建"><span class="toc-text">项目构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目启动"><span class="toc-text">项目启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它"><span class="toc-text">其它</span></a></li></ol></div><div class="post-content"><h3 id="JHipster-介绍"><a href="#JHipster-介绍" class="headerlink" title="JHipster 介绍"></a>JHipster 介绍</h3><p>JHipster 是一个Java web的全栈项目，JHipster 的英文意思是 Java 潮人，注意它的前两个字母是大写。他以Spring boot做后台支撑，Angular2 做前端框架，集代码生成，提供多种技术方案选项，从对多种数据库的支持，到 docker 、Kubernetes 等最新技术，它值得每个 Javaer 都去研究的框架。</p>
+<a id="more"></a>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
+<li><p>服务端：<br>Java环境，jdk1.8(里面用到很多java8 的新特性)<br>依赖管理工具：maven 或gradle<br>数据库：mysql 或者 mongodb 、cassandra 、PostgreSQL、Oracle</p>
+</li>
+<li><p>前端：<br>安装Node.js ，npm 包管理器，然后npm 安装下面几个模块：</p>
+</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install </span>-g yo      <span class="comment">## Yeoman ,更新npm install -g  yo </span></div><div class="line">npm <span class="keyword">install </span>-g <span class="keyword">bower </span>   <span class="comment">## Bower  </span></div><div class="line">npm <span class="keyword">install </span>-g gulp     <span class="comment">## gulp</span></div><div class="line">npm <span class="keyword">install </span>-g generator-<span class="keyword">jhipster </span> <span class="comment">##JHipster 生成器 </span></div><div class="line">npm <span class="keyword">install </span>-g <span class="keyword">jhipster-uml </span> <span class="comment">## JHipster uml 工具</span></div><div class="line">npm <span class="keyword">install </span>-g generator-<span class="keyword">jhipster </span>to update  <span class="comment">## 更新JHipster 生成器</span></div></pre></td></tr></table></figure>
+<h3 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h3><ul>
+<li>生成项目<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">yo</span> <span class="selector-tag">jhipster</span></div><div class="line"><span class="selector-tag">yo</span> <span class="selector-tag">jhipster</span><span class="selector-pseudo">:import-jdl</span> <span class="selector-tag">your-jdl-file</span><span class="selector-class">.jh</span></div><div class="line"><span class="selector-tag">yo</span> <span class="selector-tag">jhipster</span><span class="selector-pseudo">:server</span></div><div class="line"><span class="selector-tag">yo</span> <span class="selector-tag">jhipster</span><span class="selector-pseudo">:client</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>后面会有16个问题，其中第一个问题的选项：</p>
+<pre><code>* monolithic     application   #单体架构应用
+* microservice  application   #微服务应用
+* microservice  gateway       #微服务网关
+* [beat] JHipster UAA server  #(使用OAuth2 作为认证机制的微服务)
+</code></pre><p>这里我们它推荐我们先选择单页应用，比较简单入手，适合创建小型 Web 站点。</p>
+<ul>
+<li>项目配置,后台主要是spring boot 相关配置，其中 metrics 和 logstash 都是关闭的。</li>
+</ul>
+<h3 id="项目启动"><a href="#项目启动" class="headerlink" title="项目启动"></a>项目启动</h3><ul>
+<li>服务端 根据构建工具运行启动命令<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mvn spring-boot:<span class="keyword">run</span><span class="bash"> -Pprod</span></div><div class="line">gradle bootRun</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>前端 gulp<br>gulp 是一个前端构建打包工具。<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gulp        <span class="comment">#默认是运行gulp server ,可以开启热加载模式，用作在开发模式下。</span></div><div class="line">gulp <span class="keyword">build </span> <span class="comment">#在target下生成被压缩过后的www 镜头资源文件，这可以用于生产环境。</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>测试框架</p>
+<ul>
+<li><p>gatling:Gatling: 基于Scala、Akka和Netty的开源负载测试框架</p>
+</li>
+<li><p>protractor:是为Angular JS应用量身打造的端到端测试框架。</p>
+</li>
+</ul>
+</div></article><div class="tags"><a href="/tags/JHipster/">JHipster</a></div><div class="paginator"><a href="/2016/07/15/使用JHispter开发微服务/" class="prev"><i class="iconfont icon-left"></i><span> Prev</span></a><a href="/2016/06/30/MongoDB-笔记/" class="next"><span>Next</span><i class="iconfont icon-right"></i></a></div><section id="comments"><div data-thread-key="http://yoursite.com/2016/07/07/JHispter实践/index.html" data-title="JHispter实践" data-url="http://yoursite.com/2016/07/07/JHispter实践/index.html" class="ds-thread"></div><script type="text/javascript">var duoshuoQuery = {short_name: "xqming" };
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();</script></section></section><footer><div class="copyright"><p class="power">Powered by <a href="https://hexo.io/">Hexo</a> and Theme by <a href="https://github.com/ahonn/hexo-theme-even"> Even</a></p><p class="since">&copy;2016<span class="heart"><i class="iconfont icon-heart"></i></span><span class="author">xqMing</span></p></div><label id="back2top"><i class="iconfont icon-up"></i></label></footer></div><script src="/js/zepto.min.js"></script><script src="/js/theme.js"></script></body></html>
