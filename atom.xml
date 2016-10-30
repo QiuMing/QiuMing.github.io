@@ -122,9 +122,9 @@
     <link href="http://yoursite.com/2016/10/09/JWT-%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     <id>http://yoursite.com/2016/10/09/JWT-介绍及常见问题解决方案/</id>
     <published>2016-10-09T03:14:05.000Z</published>
-    <updated>2016-10-10T10:45:11.381Z</updated>
+    <updated>2016-10-30T07:24:57.738Z</updated>
     
-    <content type="html"><![CDATA[<p>JWT 全称Json Web Token，是一种基于 IETF 定制的开放标准 <a href="https://tools.ietf.org/html/rfc7519]https://tools.ietf.org/html/rfc7519" target="_blank" rel="external">RFC-7519</a> ，用作 <strong>身份认证</strong>与<strong>数据传输</strong> 的 Token。因其 <strong>轻量</strong> 与 <strong>无状态</strong> 的特性，被广泛用于 Api 的设计，以及解决在微服务、分布式应用中，<strong> 用户身份认证 </strong> 的问题。</p>
+    <content type="html"><![CDATA[<p>JWT 全称Json Web Token，是一种基于 IETF 定制的开放标准 <a href="https://tools.ietf.org/html/rfc7519]https://tools.ietf.org/html/rfc7519" target="_blank" rel="external">RFC-7519</a> ，用作 <strong>身份认证</strong>与 <strong>数据传输</strong> 的 Token。因其 <strong>轻量</strong> 与 <strong>无状态</strong> 的特性，被广泛用于 Api 的设计，以及解决在微服务、分布式应用中，<strong>用户身份认证 </strong> 的问题。</p>
 <p>本文先介绍 Json Web Token ，后面在探讨 JWT 常见问题以及解决方案。</p>
 <a id="more"></a>
 <h2 id="JWT-的组成"><a href="#JWT-的组成" class="headerlink" title="JWT 的组成"></a>JWT 的组成</h2><h3 id="头部-header"><a href="#头部-header" class="headerlink" title="头部-header"></a>头部-header</h3><p>这部分包括了两个类型：</p>
@@ -133,15 +133,17 @@
 <li>alg: 算法的类型，主要有 HMAC-SHA256  和 RSA-SHA256。</li>
 </ul>
 <p><strong>tip</strong>：这里提一下两个加密算法。 HMAC-SHA-256 算法，即 HMAC 运算利用哈希算法，以一个密钥和一个消息为输入，生成一个消息摘要作为输出，因为引入了密钥，所以 HMAC-SHA-256 不在是个哈希算法，更像一个加密算法。RSA-SHA256 算法，先使用 RSA 算法加密消息，在经过 SHA256 算法来进行哈希签名。</p>
-<h3 id="载荷-Payload"><a href="#载荷-Payload" class="headerlink" title="载荷-Payload"></a>载荷-Payload</h3><p>承载了 Token 的具体内容，除去 JWT 提供的默认字段，用户也可以自定义字段。</p>
+<h3 id="载荷-Payload"><a href="#载荷-Payload" class="headerlink" title="载荷-Payload"></a>载荷-Payload</h3><p>承载了 Token 的具体内容.在 Payload 中保存了 Token 的 claim，即 token 的数据. 下面 JWT 推荐的字段，可以根据需求选择性设置：</p>
 <ul>
 <li><strong>iss</strong>: The issuer of the token，token 是给谁的。</li>
-<li><strong>sub</strong>: The subject of the token，token 主题。</li>
+<li><strong>sub</strong>: The subject of the token，token 主体。</li>
 <li><strong>exp</strong>: Expiration Time。 token 过期时间，Unix 时间戳格式。</li>
 <li><strong>iat</strong>: Issued At。 token 创建时间， Unix 时间戳格式。</li>
 <li><strong>jti</strong>: JWT ID。针对当前 token 的唯一标识。</li>
+<li><strong>aud</strong>: Audience，及接收 token 受众。</li>
+<li><strong>nbf</strong>: 即 Not before。如果当前时间在nbf里的时间之前，则Token不被接受。</li>
 </ul>
-<p>从 Payload 的结构上，我们可以看得出 JWT  保存了 <strong>用户常用的信息，</strong>服务端每次从用户请求中获取 Token 后就可以从里面拿到用户的基本信息，而不像 session + cookie 那套机制，服务端将用户信息保存在 session 中。由此我们可以说，JWT 是 <strong>自说明，无状态的</strong>。</p>
+<p>从上看出，JWT  保存了 <strong>用户常用的信息</strong> 和 <strong>Token 自身的信息</strong>，服务端每次从用户请求中获取 Token 后就可以从里面拿到用户的基本信息，而不像 session + cookie 那套机制，服务端将用户信息保存在 session 中。由此我们可以说，JWT 是 <strong>自说明，无状态的</strong>。</p>
 <h3 id="签名-Signature"><a href="#签名-Signature" class="headerlink" title="签名-Signature"></a>签名-Signature</h3><p>JWT 的加密解密过程都是在服务端完成，用户登录后成功后，每次请求都带上 Token 作为身份凭证，客户端可以读取 token 的内容，但不需要编辑它。所以，为了防止这个身份凭证被人串改，需要签名。</p>
 <p>签名要利用 Header 中声明的加密算法，如选用了HmacSHA256 算法，则公式如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$encodedContent</span> = base64UrlEncode(header) + <span class="string">"."</span> + base64UrlEncode(payload);</div><div class="line"><span class="variable">$signature</span> = <span class="built_in">hash</span>HmacSHA256(<span class="variable">$encodedContent</span>);</div></pre></td></tr></table></figure></p>
 <p>因为有许多类库已经提供了对 JWT 的支持，所以签名和校验签名，它们都会帮我们完成。我们也可以在 <a href="http://jwt.io" target="_blank" rel="external">http://jwt.io</a> 上来验证我们的签名。</p>
@@ -168,7 +170,12 @@
 <li><p>性能更优，因为不使用 cookie + session  作为认证的机制， 所有服务器端不需要在每次会话对 cookie 和 session  进行序列与反序列化，我们需要做的就是使用选定的算法和私钥解密令牌，获取用户信息。</p>
 </li>
 </ul>
-<h2 id="JWT-常见问题及解决方案"><a href="#JWT-常见问题及解决方案" class="headerlink" title="JWT 常见问题及解决方案"></a>JWT 常见问题及解决方案</h2><h3 id="如何使-token-失效？"><a href="#如何使-token-失效？" class="headerlink" title="如何使 token 失效？"></a>如何使 token 失效？</h3><p>在这个问题在 <a href="http://stackoverflow.com/questions/21978658/invalidating-json-web-tokens" target="_blank" rel="external">stackoverflow</a> 上有讨论，在此我总结了下，token 需要失效的场景以及解决方案：</p>
+<h2 id="JWT-常见问题及解决方案"><a href="#JWT-常见问题及解决方案" class="headerlink" title="JWT 常见问题及解决方案"></a>JWT 常见问题及解决方案</h2><h3 id="如何使-token-失效？"><a href="#如何使-token-失效？" class="headerlink" title="如何使 token 失效？"></a>如何使 token 失效？</h3><p>对于一些特殊的业务，如用户退出，往往需要使得现有 token 失效。在这个问题在 <a href="http://stackoverflow.com/questions/21978658/invalidating-json-web-tokens" target="_blank" rel="external">stackoverflow</a> 上有讨论，在此我总结了下，主要有两种思路：</p>
+<ul>
+<li>1、服务端维护所有有效的 token。</li>
+<li>2、黑名单机制，服务端保存所有失效但是为超时的 token 。</li>
+</ul>
+<p>思路一的话可控性非常好，想要哪个 token 失效，删掉它即可。<br>思路二的话，在 stackoverflow 上获得的赞同数较多，以下我列出了在使用黑名单机制的情况时， token 需要失效的场景以及解决方案：</p>
 <table>
 <thead>
 <tr>
@@ -199,14 +206,17 @@
 </tr>
 </tbody>
 </table>
-<p><strong>tip</strong>: 使用 redis 来维护 token  黑名单，这里存储在 redis 的数据实体可以自己定义，以下是我的设计:<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"key"</span>: <span class="string">"userId"</span>,</div><div class="line">    <span class="attr">"value"</span>: &#123;</div><div class="line">        <span class="attr">"invalid_type"</span>: <span class="string">"失效类型:退出登陆、修改密码、修改角色、账号禁用"</span>,</div><div class="line">        <span class="attr">"start_time"</span>: <span class="string">" token 的 发放时间 iat  &lt; start_time 都视为非法"</span>,</div><div class="line">        <span class="attr">"exp"</span>: <span class="string">"redis 存储时间"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="如何实现-token-自动刷新"><a href="#如何实现-token-自动刷新" class="headerlink" title="如何实现 token 自动刷新?"></a>如何实现 token 自动刷新?</h3><p>因为 token 设置了一个有效期，所以需要引入一套刷新机制，避免让用户重新输入密码登陆而带来的体验问题。和上面的问题一样，这个问题在  <a href="http://stackoverflow.com/questions/26739167/jwt-json-web-token-automatic-prolongation-of-expiration" target="_blank" rel="external">stackoverflow</a> 也有讨论。综合笔者查阅的资料，总结如下：</p>
+<p><strong>tip1</strong>: 使用 redis 来维护 token  黑名单，这里存储在 redis 的数据实体可以自己定义，以下是我的设计:<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"key"</span>: <span class="string">"userId"</span>,</div><div class="line">    <span class="attr">"value"</span>: &#123;</div><div class="line">        <span class="attr">"invalid_type"</span>: <span class="string">"失效类型:退出登陆、修改密码、修改角色、账号禁用"</span>,</div><div class="line">        <span class="attr">"start_time"</span>: <span class="string">" token 的 发放时间 iat  &lt; start_time 都视为非法"</span>,</div><div class="line">        <span class="attr">"exp"</span>: <span class="string">"redis 存储时间"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>tip2</strong>:其实有种做法是在关系型数据库里面存一些字段，然后每次校验 token 时候都去查询数据库，这种做法可以做到即时校验 token 的有效性，但是这种做法开销较大，笔者并不推荐。也有人说这种做法违背了 JWT 无状态的初衷，这里似乎涉及到对无状态的理解了，redis 也是一种数据库，这里就看设计者如何权衡了。</p>
+<h3 id="如何实现-token-自动刷新"><a href="#如何实现-token-自动刷新" class="headerlink" title="如何实现 token 自动刷新?"></a>如何实现 token 自动刷新?</h3><p>如果服务端给 token 设置了一个有效期，则需要引入一套刷新机制，避免让用户重新输入密码登陆而带来的体验问题。和上面的问题一样，这个问题在  <a href="http://stackoverflow.com/questions/26739167/jwt-json-web-token-automatic-prolongation-of-expiration" target="_blank" rel="external">stackoverflow</a> 也有讨论。综合笔者查阅的资料，总结如下：</p>
 <p>这个问题要具体情况具体分析：</p>
 <h4 id="针对手机-App-应用"><a href="#针对手机-App-应用" class="headerlink" title="针对手机 App 应用"></a>针对手机 App 应用</h4><p>对于 App 这种需要安装在手机上的应用，因为一般情况下一个手机对应一个用户，所以很多 App 一般都只输入一次密码，对此有以下几种解决方案：</p>
 <ul>
 <li><p>客户端保存密码自动登陆方案。客户端获取用户密码后，将密码对称加密保存在客户端，Token 失效后，客户端在将密码取出帮用户自动登陆，从而获取新的 token。这种方案适合 app ，保存密码在本地这种方案要重点解决 密钥和用户密码的安全。</p>
 </li>
 <li><p>使用”永久”有效的 refresh token 方案。永久的意思是指在除去用户修改密码这种特性情况外有效。当然这个 refresh token  要和用户设备的信息挂钩，要确保只能在一个设备上使用。服务端也要对这个 refresh token 有所控制，即要做到随时可以时这个 refresh token 失效。因此，这个 refresh token 常被设计为一个包含了用户的设备信息、以及服务端存储的一个随机数。</p>
+</li>
+<li><p>如果 API 使用了 Https ，且服务端维护了所有的 token信息，可以考虑不需要给 Token 设置有效期，用户退出，销毁　token　即可。</p>
 </li>
 </ul>
 <h4 id="针对-Web-应用"><a href="#针对-Web-应用" class="headerlink" title="针对 Web 应用"></a>针对 Web 应用</h4><p>对于 Web 应用，因为依托于浏览器，这里在考虑 Token 自动刷新时，更多借鉴与 session 的机制。</p>
@@ -216,9 +226,8 @@
 <li><p>使用一个有较长期限的 refresh token 方案。这个 refresh token  相对于普通的 token 只是有效时间长一些。它的设计相对麻烦，因为他同要解决 refresh token 自刷新问题，服务端可控制失效问题，这里可以借鉴 Oauth 2.0 中的refresh token 机制。</p>
 </li>
 </ul>
-<h2 id="JWT-的不足"><a href="#JWT-的不足" class="headerlink" title="JWT 的不足"></a>JWT 的不足</h2><p>JWT 设计的初衷是轻量、无状态，这是它的优点，但也是它的不足之处(事物都有两面性)，因为它大小有限制，另外无状态意味着它不能即使的判断 Token 的有效性，在需要 token 过期时要引入黑名单机制。</p>
-<p><strong>tip</strong>:其实有种做法是在数据库里面存一些字段，然后每次校验 token 时候都去查询数据库，这种做法可以做到即时校验 token 的有效性，但是这种做法开销较大，笔者并不推荐。也有人说这种做法违背了 JWT 无状态的初衷，笔者的理解是，每次的数据库查询，硬是把 token 变成了带状态的。</p>
 <h2 id="JWT-存储-浏览器"><a href="#JWT-存储-浏览器" class="headerlink" title="JWT 存储(浏览器)"></a>JWT 存储(浏览器)</h2><p>客户端获取 Token 后， 需要临时存储，目前可以选择 local storage、session storage 和 cookie。注意如果 token 存放在 Web Storage (local storage、session storage)，需要留意 XSS 注入，因为 js 可以访问到这里。如果放入 cookie 的话，要记得加上 readOnyl，不过这又要留意 CSRF 攻击了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>JWT 设计的初衷是轻量、无状态、自说明，这是它的优点，但它不是银弹，轻量表明它大小有限制，不适携带过多数据；无状态意味着它不能即使的判断 Token 的有效性，在需要引入相应的机制来弥补；自说明要求你不能直接存放敏感数据在 claim ，所以在使用 JWT 的时候，要结合现有的业务来，有时候我们可以参考 JWT 的部分优点，来设计自己的 token。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1、<a href="https://tools.ietf.org/html/rfc7519" target="_blank" rel="external">RFC7519 协议</a></p>
 <p>2、<a href="http://stackoverflow.com/questions/21978658/invalidating-json-web-tokens#" target="_blank" rel="external">stackoverflow 上关于如何使 Token 失效的探讨</a></p>
 <p>3、<a href="http://stackoverflow.com/questions/26739167/jwt-json-web-token-automatic-prolongation-of-expiration" target="_blank" rel="external">stackoverflow 上关于 Token 到期自动延长的解决方案的探讨</a></p>
@@ -231,7 +240,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;JWT 全称Json Web Token，是一种基于 IETF 定制的开放标准 &lt;a href=&quot;https://tools.ietf.org/html/rfc7519]https://tools.ietf.org/html/rfc7519&quot;&gt;RFC-7519&lt;/a&gt; ，用作 &lt;strong&gt;身份认证&lt;/strong&gt;与&lt;strong&gt;数据传输&lt;/strong&gt; 的 Token。因其 &lt;strong&gt;轻量&lt;/strong&gt; 与 &lt;strong&gt;无状态&lt;/strong&gt; 的特性，被广泛用于 Api 的设计，以及解决在微服务、分布式应用中，&lt;strong&gt; 用户身份认证 &lt;/strong&gt; 的问题。&lt;/p&gt;
+      &lt;p&gt;JWT 全称Json Web Token，是一种基于 IETF 定制的开放标准 &lt;a href=&quot;https://tools.ietf.org/html/rfc7519]https://tools.ietf.org/html/rfc7519&quot;&gt;RFC-7519&lt;/a&gt; ，用作 &lt;strong&gt;身份认证&lt;/strong&gt;与 &lt;strong&gt;数据传输&lt;/strong&gt; 的 Token。因其 &lt;strong&gt;轻量&lt;/strong&gt; 与 &lt;strong&gt;无状态&lt;/strong&gt; 的特性，被广泛用于 Api 的设计，以及解决在微服务、分布式应用中，&lt;strong&gt;用户身份认证 &lt;/strong&gt; 的问题。&lt;/p&gt;
 &lt;p&gt;本文先介绍 Json Web Token ，后面在探讨 JWT 常见问题以及解决方案。&lt;/p&gt;
     
     </summary>
@@ -840,7 +849,7 @@ public interface Comparator&lt;T&gt; { int compare(T o1, T o2); boolean equals(O
     <link href="http://yoursite.com/2016/01/27/Vim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     <id>http://yoursite.com/2016/01/27/Vim常用快捷键/</id>
     <published>2016-01-27T04:56:29.000Z</published>
-    <updated>2016-10-09T03:54:28.550Z</updated>
+    <updated>2016-10-17T03:57:42.289Z</updated>
     
     <content type="html"><![CDATA[<p>学习 Vim ，从它的快捷方式开始。。。<br><a id="more"></a></p>
 <h1 id="一般模式下的快捷键"><a href="#一般模式下的快捷键" class="headerlink" title="一般模式下的快捷键"></a>一般模式下的快捷键</h1><hr>
@@ -1061,6 +1070,10 @@ public interface Comparator&lt;T&gt; { int compare(T o1, T o2); boolean equals(O
 <tr>
 <td>:%d</td>
 <td>命令行模式下删除，比较强大</td>
+</tr>
+<tr>
+<td>:n1,n2</td>
+<td>删除从 n1 到 n2 行</td>
 </tr>
 </tbody>
 </table>
