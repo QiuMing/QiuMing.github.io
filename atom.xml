@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-29T13:48:59.000Z</updated>
+  <updated>2018-05-29T14:06:40.901Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring Boot 实现组合接口</title>
+    <link href="http://yoursite.com/2018/05/29/Spring-Boot-%E5%AE%9E%E7%8E%B0%E7%BB%84%E5%90%88%E6%8E%A5%E5%8F%A3/"/>
+    <id>http://yoursite.com/2018/05/29/Spring-Boot-实现组合接口/</id>
+    <published>2018-05-29T14:03:57.000Z</published>
+    <updated>2018-05-29T14:06:40.901Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Spring-组合请求-API-demo"><a href="#Spring-组合请求-API-demo" class="headerlink" title="Spring 组合请求 API demo"></a>Spring 组合请求 API demo</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><ul>
+<li>app 在启动的时候，会调用服务端多个接口，随着业务迭代开发，请求接口会越来越多，致使 app 在启动的时候会有多次 io 请求，启动缓慢。</li>
+<li>为解决此问题，app 端同学会要求服务端同学，在一个接口内，返回多种业务数据，或者要求在一个接口，组合响应多个接口数据。在此背景下，组合请求接口因需而生。</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>服务端定义的 restful 接口，合理划分好粒度，标明哪些是支持组合请求接口的。</li>
+<li>客户端同学，按需要，自己组合请求所需要的接口（前提是这些接口支持放在组合接口内），带上参数，一次性请求到服务端，服务端一次处理好多个接口请求后，统一返回多个接口数据。</li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ul>
+<li>通过 requestMappingHandlerMapping.getHandlerMethods() 方法，可以获取到所有的方法处理器，即为 <figure class="highlight plain"><figcaption><span>HandlerMethod> HandlerMethodMap = requestMappingHandlerMapping.getHandlerMethods();```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">* 根据 requestItem 中的 url 和 method ，遍历 HandlerMethodMap ，可以唯一确定一个 HandlerMethod。</div><div class="line">* 获取到 HandlerMethod ，后面可以从里面取到该方法所在类，利用 ReflectionUtils.invokeMethod(method, object, args) 反射执行方法，获取结果。</div><div class="line"></div><div class="line">## 举例说明：</div><div class="line"></div><div class="line">* 为了安全控制，在支持组合接口的方法上面，要加上 ``` @EnableCombineRequest ``` 注解。告诉 Spring 容器，这方法支持放在组合接口中，如果把不支持组合接口放到组合接口中去请求，会报``` IllegalArgumentException</div></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="不带注解事例"><a href="#不带注解事例" class="headerlink" title="不带注解事例"></a>不带注解事例</h3><ul>
+<li><p>请求的 request</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&#123;<span class="attr">"method"</span>:<span class="string">"GET"</span>,<span class="attr">"requestId"</span>:<span class="string">"111"</span>,<span class="attr">"url"</span>:<span class="string">"/ming"</span>&#125;,&#123;<span class="attr">"method"</span>:<span class="string">"GET"</span>,<span class="attr">"requestId"</span>:<span class="string">"222"</span>,<span class="attr">"url"</span>:<span class="string">"/fang"</span>&#125;]</div></pre></td></tr></table></figure>
+</li>
+<li><p>响应的 response</p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&#123;<span class="attr">"requestId"</span>:<span class="string">"222"</span>,<span class="attr">"url"</span>:<span class="string">"/fang"</span>,<span class="attr">"httpStatus"</span>:<span class="number">200</span>,<span class="attr">"entity"</span>:&#123;<span class="attr">"id"</span>:<span class="number">1</span>,<span class="attr">"name"</span>:<span class="string">"芳"</span>&#125;&#125;,&#123;<span class="attr">"requestId"</span>:<span class="string">"111"</span>,<span class="attr">"url"</span>:<span class="string">"/ming"</span>,<span class="attr">"httpStatus"</span>:<span class="number">200</span>,<span class="attr">"entity"</span>:&#123;<span class="attr">"id"</span>:<span class="number">2</span>,<span class="attr">"name"</span>:<span class="string">"明"</span>&#125;&#125;]</div></pre></td></tr></table></figure>
+<h3 id="带-RequestParam-注解例子"><a href="#带-RequestParam-注解例子" class="headerlink" title="带 @RequestParam 注解例子"></a>带 @RequestParam 注解例子</h3><ul>
+<li>处理方法</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="variable">@EnableCombineRequest</span></div><div class="line"><span class="variable">@GetMapping</span>(path = <span class="string">"/liang"</span>)</div><div class="line">public UserDto getLiang(<span class="variable">@RequestParam</span>(name=<span class="string">"userName"</span>,defaultValue = <span class="string">"明"</span>)String  name,Integer id) &#123;</div><div class="line">    <span class="selector-tag">log</span><span class="selector-class">.info</span>(<span class="string">"name:&#123;&#125;,age:&#123;&#125;"</span>,name,id);</div><div class="line">    <span class="selector-tag">return</span> <span class="selector-tag">new</span> <span class="selector-tag">UserDto</span>(id,name);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>请求的 request</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&#123;<span class="attr">"method"</span>:<span class="string">"GET"</span>,<span class="attr">"requestId"</span>:<span class="string">"1111"</span>,<span class="attr">"param"</span>:&#123;<span class="attr">"id"</span>:<span class="number">11</span>&#125;,<span class="attr">"url"</span>:<span class="string">"/liang"</span>&#125;,&#123;<span class="attr">"method"</span>:<span class="string">"GET"</span>,<span class="attr">"requestId"</span>:<span class="string">"222"</span>,<span class="attr">"param"</span>:&#123;<span class="attr">"param"</span>:<span class="string">"亮"</span>,<span class="attr">"id"</span>:<span class="number">12</span>&#125;,<span class="attr">"url"</span>:<span class="string">"/liang"</span>&#125;]</div></pre></td></tr></table></figure>
+<ul>
+<li>响应的 response</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&#123;<span class="attr">"requestId"</span>:<span class="string">"1111"</span>,<span class="attr">"url"</span>:<span class="string">"/liang"</span>,<span class="attr">"httpStatus"</span>:<span class="number">200</span>,<span class="attr">"entity"</span>:&#123;<span class="attr">"id"</span>:<span class="number">11</span>,<span class="attr">"name"</span>:<span class="string">"明"</span>&#125;&#125;,&#123;<span class="attr">"requestId"</span>:<span class="string">"222"</span>,<span class="attr">"url"</span>:<span class="string">"/liang"</span>,<span class="attr">"httpStatus"</span>:<span class="number">200</span>,<span class="attr">"entity"</span>:&#123;<span class="attr">"id"</span>:<span class="number">12</span>,<span class="attr">"name"</span>:<span class="string">"亮"</span>&#125;&#125;]</div></pre></td></tr></table></figure>
+<h3 id="带-PathVariable-注解例子"><a href="#带-PathVariable-注解例子" class="headerlink" title="带 @PathVariable 注解例子"></a>带 @PathVariable 注解例子</h3><ul>
+<li><p>处理方法</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="variable">@EnableCombineRequest</span></div><div class="line"><span class="variable">@GetMapping</span>(path = <span class="string">"/qiu/&#123;id&#125;"</span>)</div><div class="line">public UserDto getQiu(<span class="variable">@PathVariable</span>(name=<span class="string">"id"</span>)Integer id,<span class="variable">@RequestParam</span>(name=<span class="string">"userName"</span>,defaultValue = <span class="string">"丘"</span>)String  name) &#123;</div><div class="line">    <span class="selector-tag">log</span><span class="selector-class">.info</span>(<span class="string">"name:&#123;&#125;,age:&#123;&#125;"</span>,name,id);</div><div class="line">    <span class="selector-tag">return</span> <span class="selector-tag">new</span> <span class="selector-tag">UserDto</span>(id,name);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>请求例子 </p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&#123;<span class="attr">"method"</span>:<span class="string">"GET"</span>,<span class="attr">"requestId"</span>:<span class="string">"111"</span>,<span class="attr">"url"</span>:<span class="string">"/qiu/11"</span>&#125;,&#123;<span class="attr">"method"</span>:<span class="string">"GET"</span>,<span class="attr">"requestId"</span>:<span class="string">"222"</span>,<span class="attr">"param"</span>:&#123;<span class="attr">"userName"</span>:<span class="string">"秋"</span>&#125;,<span class="attr">"url"</span>:<span class="string">"/qiu/22"</span>&#125;]</div></pre></td></tr></table></figure>
+<ul>
+<li>响应例子<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&#123;<span class="attr">"requestId"</span>:<span class="string">"111"</span>,<span class="attr">"url"</span>:<span class="string">"/qiu/11"</span>,<span class="attr">"httpStatus"</span>:<span class="number">200</span>,<span class="attr">"entity"</span>:&#123;<span class="attr">"id"</span>:<span class="number">11</span>,<span class="attr">"name"</span>:<span class="string">"丘"</span>&#125;&#125;,&#123;<span class="attr">"requestId"</span>:<span class="string">"222"</span>,<span class="attr">"url"</span>:<span class="string">"/qiu/22"</span>,<span class="attr">"httpStatus"</span>:<span class="number">200</span>,<span class="attr">"entity"</span>:&#123;<span class="attr">"id"</span>:<span class="number">22</span>,<span class="attr">"name"</span>:<span class="string">"秋"</span>&#125;&#125;]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><p>细节重构，详细说明不支持的情况</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Spring-组合请求-API-demo&quot;&gt;&lt;a href=&quot;#Spring-组合请求-API-demo&quot; class=&quot;headerlink&quot; title=&quot;Spring 组合请求 API demo&quot;&gt;&lt;/a&gt;Spring 组合请求 API demo&lt;/h2&gt;&lt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Spring Boot 在贝聊的应用</title>
