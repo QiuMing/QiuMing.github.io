@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/10/10/Git-%E5%B8%B8%E8%A7%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E5%8F%8A%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2018-06-04T15:20:40.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/05/29/%E5%9C%A8Spring%E4%B8%AD%E5%AE%9E%E7%8E%B0%E7%BB%84%E5%90%88%E8%AF%B7%E6%B1%82%E6%8E%A5%E5%8F%A3/</loc>
     
     <lastmod>2018-06-04T15:18:56.000Z</lastmod>
@@ -16,14 +23,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2016/10/09/JWT-%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
+    <loc>http://yoursite.com/2016/01/27/Vim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
     
     <lastmod>2017-02-13T07:12:55.389Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2016/01/27/Vim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
+    <loc>http://yoursite.com/2016/10/09/JWT-%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
     
     <lastmod>2017-02-13T07:12:55.389Z</lastmod>
     
@@ -33,13 +40,6 @@
     <loc>http://yoursite.com/2016/01/27/Hexo%E5%B0%8F%E8%AE%A1/</loc>
     
     <lastmod>2017-02-13T07:12:55.389Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/10/10/Git-%E5%B8%B8%E8%A7%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E5%8F%8A%E5%91%BD%E4%BB%A4/</loc>
-    
-    <lastmod>2016-10-13T09:43:15.777Z</lastmod>
     
   </url>
   

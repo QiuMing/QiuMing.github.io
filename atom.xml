@@ -223,7 +223,7 @@
     <link href="http://yoursite.com/2016/10/10/Git-%E5%B8%B8%E8%A7%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E5%8F%8A%E5%91%BD%E4%BB%A4/"/>
     <id>http://yoursite.com/2016/10/10/Git-常见应用场景及命令/</id>
     <published>2016-10-10T10:23:22.000Z</published>
-    <updated>2016-10-13T09:43:15.777Z</updated>
+    <updated>2018-06-04T15:20:40.000Z</updated>
     
     <content type="html"><![CDATA[<p>Git 在日常开发中用的非常普遍，对于一些用的比较少的命令，总是用到再查，然后又忘记，反复如此其实挺浪费时间的，因此写了这篇文章，做些笔记。</p>
 <a id="more"></a>
@@ -231,17 +231,13 @@
 <p>以后每次更新的时候就运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git update</div></pre></td></tr></table></figure></p>
 <p>嗯，没错，就是利用了 alias  来偷懒输入那么长的地址。</p>
 <h2 id="重新设置远程仓库链接地址或者协议"><a href="#重新设置远程仓库链接地址或者协议" class="headerlink" title="重新设置远程仓库链接地址或者协议"></a>重新设置远程仓库链接地址或者协议</h2><ul>
-<li><p>比如我们在 git 上新建了或者 fork 了别人的项目，默认是走 http 协议，这样需要每次 push 都需要输入密码，而我实际上已经在 gihub 上传了我的公钥，我可以走 ssh 协议，不需要输入密码。</p>
-</li>
-<li><p>解决命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote set-url origin  git@github.com:QiuMing/project_name.git</div></pre></td></tr></table></figure>
+<li>比如我们在 git 上新建了或者 fork 了别人的项目，默认是走 http 协议，这样需要每次 push 都需要输入密码，而我实际上已经在 gihub 上传了我的公钥，我可以走 ssh 协议，不需要输入密码。</li>
+<li>解决命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote set-url origin  git@github.com:QiuMing/project_name.git</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="删除已经-push-到远程仓库但需要忽略的文件"><a href="#删除已经-push-到远程仓库但需要忽略的文件" class="headerlink" title="删除已经 push 到远程仓库但需要忽略的文件"></a>删除已经 push 到远程仓库但需要忽略的文件</h2><ul>
-<li><p>比如不小心吧 .idea 这个的文件不小心 push 到 git 上，需要删除。</p>
-</li>
-<li><p>解决命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ echo &apos;.idea&apos; &gt;&gt; .gitignore  ##添加到 .gitignore</div><div class="line"></div><div class="line">$ git rm —cached -r .idea   ##从 cache 中删除</div><div class="line"></div><div class="line">然后 add  commit  psuh</div></pre></td></tr></table></figure>
+<li>比如不小心吧 .idea 这个的文件不小心 push 到 git 上，需要删除。</li>
+<li>解决命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ echo &apos;.idea&apos; &gt;&gt; .gitignore  ##添加到 .gitignore</div><div class="line"></div><div class="line">$ git rm —cached -r .idea   ##从 cache 中删除</div><div class="line"></div><div class="line">然后 add  commit  psuh</div></pre></td></tr></table></figure>
 </li>
 </ul>
 ]]></content>
@@ -953,38 +949,6 @@ public interface Comparator&lt;T&gt; { int compare(T o1, T o2); boolean equals(O
   </entry>
   
   <entry>
-    <title>Hexo小计</title>
-    <link href="http://yoursite.com/2016/01/27/Hexo%E5%B0%8F%E8%AE%A1/"/>
-    <id>http://yoursite.com/2016/01/27/Hexo小计/</id>
-    <published>2016-01-27T04:56:29.000Z</published>
-    <updated>2017-02-13T07:12:55.389Z</updated>
-    
-    <content type="html"><![CDATA[<p>因为选择了技术这条路，也选择了通过 Hexo 来写博客，所以，这篇小记，用来记录笔者在使用 Hexo 的常用命令，以及遇到的一些问题。</p>
-<a id="more"></a>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;postName&quot; 		#新建文章</div><div class="line">hexo new page &quot;pageName&quot;	#新建页面</div><div class="line">hexo generate		#生成静态页面至public目录</div><div class="line">hexo server		#开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）</div><div class="line">hexo deploy		#将.deploy目录部署到GitHub</div><div class="line">hexo help 		#查看帮助</div><div class="line">hexo version		#查看Hexo的版本</div><div class="line">hexo deploy -g 		#生成加部署</div><div class="line">hexo server -g		#生成加预览</div></pre></td></tr></table></figure>
-<h2 id="命令的简写"><a href="#命令的简写" class="headerlink" title="命令的简写"></a>命令的简写</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo n == hexo new</div><div class="line">hexo g == hexo generate</div><div class="line">hexo s == hexo server</div><div class="line">hexo d == hexo deploy</div></pre></td></tr></table></figure>
-<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><ul>
-<li>下载主题放到 themes 文件夹中，在 _config.ym 中修改 theme 的名字</li>
-</ul>
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><ul>
-<li>ERROR Deployer not found: git 或者 ERROR Deployer not found: github</li>
-<li>解决方法： npm install hexo-deployer-git –save </li>
-<li>deploy 里面的 type 值为 git</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;因为选择了技术这条路，也选择了通过 Hexo 来写博客，所以，这篇小记，用来记录笔者在使用 Hexo 的常用命令，以及遇到的一些问题。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="博客 Hexo" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2-Hexo/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Vim常用快捷键</title>
     <link href="http://yoursite.com/2016/01/27/Vim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     <id>http://yoursite.com/2016/01/27/Vim常用快捷键/</id>
@@ -1414,6 +1378,38 @@ public interface Comparator&lt;T&gt; { int compare(T o1, T o2); boolean equals(O
     
     
       <category term="Vim" scheme="http://yoursite.com/tags/Vim/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo小计</title>
+    <link href="http://yoursite.com/2016/01/27/Hexo%E5%B0%8F%E8%AE%A1/"/>
+    <id>http://yoursite.com/2016/01/27/Hexo小计/</id>
+    <published>2016-01-27T04:56:29.000Z</published>
+    <updated>2017-02-13T07:12:55.389Z</updated>
+    
+    <content type="html"><![CDATA[<p>因为选择了技术这条路，也选择了通过 Hexo 来写博客，所以，这篇小记，用来记录笔者在使用 Hexo 的常用命令，以及遇到的一些问题。</p>
+<a id="more"></a>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;postName&quot; 		#新建文章</div><div class="line">hexo new page &quot;pageName&quot;	#新建页面</div><div class="line">hexo generate		#生成静态页面至public目录</div><div class="line">hexo server		#开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）</div><div class="line">hexo deploy		#将.deploy目录部署到GitHub</div><div class="line">hexo help 		#查看帮助</div><div class="line">hexo version		#查看Hexo的版本</div><div class="line">hexo deploy -g 		#生成加部署</div><div class="line">hexo server -g		#生成加预览</div></pre></td></tr></table></figure>
+<h2 id="命令的简写"><a href="#命令的简写" class="headerlink" title="命令的简写"></a>命令的简写</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo n == hexo new</div><div class="line">hexo g == hexo generate</div><div class="line">hexo s == hexo server</div><div class="line">hexo d == hexo deploy</div></pre></td></tr></table></figure>
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><ul>
+<li>下载主题放到 themes 文件夹中，在 _config.ym 中修改 theme 的名字</li>
+</ul>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><ul>
+<li>ERROR Deployer not found: git 或者 ERROR Deployer not found: github</li>
+<li>解决方法： npm install hexo-deployer-git –save </li>
+<li>deploy 里面的 type 值为 git</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;因为选择了技术这条路，也选择了通过 Hexo 来写博客，所以，这篇小记，用来记录笔者在使用 Hexo 的常用命令，以及遇到的一些问题。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="博客 Hexo" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2-Hexo/"/>
     
   </entry>
   
