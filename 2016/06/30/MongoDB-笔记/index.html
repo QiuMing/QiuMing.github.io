@@ -6,7 +6,7 @@
 <li><p>将其添加到系统服务，在 cmd 系统管理员模式下运行下面命令(路径按实际情况改动)</p>
 </li>
 </ul>
-<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">mongod.</span><span class="string">exe </span> <span class="built_in">--logpath</span> <span class="string">"C:\Program Files\MongoDB\data\log\mongo.log"</span> <span class="built_in">--logappend</span> <span class="built_in">--dbpath</span> <span class="string">"C:\Program Files\MongoDB\data\db"</span> <span class="built_in">--port</span> <span class="string">27017 </span><span class="built_in">--serviceName</span> <span class="string">"mongodb"</span> <span class="built_in">--serviceDisplayName</span> <span class="string">"mongodb"</span> <span class="built_in">--install</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod.exe  --logpath &quot;C:\Program Files\MongoDB\data\log\mongo.log&quot; --logappend --dbpath &quot;C:\Program Files\MongoDB\data\db&quot; --port 27017 --serviceName &quot;mongodb&quot; --serviceDisplayName &quot;mongodb&quot; --install</div></pre></td></tr></table></figure>
 <ul>
 <li>设置开机自启动</li>
 </ul>
@@ -14,7 +14,7 @@
 <ul>
 <li>连接远程的mongo</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">mongo</span> <span class="number">192.168.111.200:27017</span>/mdoctor -u mdoctor -p password</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongo 192.168.111.200:27017/mdoctor -u mdoctor -p password</div></pre></td></tr></table></figure>
 <h2 id="MongoDB-的数据结构以及底层"><a href="#MongoDB-的数据结构以及底层" class="headerlink" title="MongoDB 的数据结构以及底层"></a>MongoDB 的数据结构以及底层</h2><p>存储格式：面向集合存储，一个collection 相当于mysql中的一个table，底层文件存储格式为BSON（一种JSON的扩展），Binary JSON </p>
 <h2 id="MongoDB-的业务场景"><a href="#MongoDB-的业务场景" class="headerlink" title="MongoDB 的业务场景"></a>MongoDB 的业务场景</h2><p> mongodb的主要目标是在键/值存储方式（提供了高性能和高度伸缩性）以及传统的RDBMS系统（丰富的功能）架起一座桥梁，集两者的优势于一身。mongo适用于以下场景：</p>
 <ul>

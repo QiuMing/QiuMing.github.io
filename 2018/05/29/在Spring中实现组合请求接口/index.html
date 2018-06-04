@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="xqMing"><meta name="description" content="背景App在启动的时候，会调用服务端多个接口，随着业务迭代开发，请求接口会越来越多，致使App在启动的时候会有多次IO请求，启动缓慢。为解决此问题，App端同学会要求服务端同学，在一个接口内，返回多种业务数据，或者要求在一个接口，组合响应多个接口数据。在此背景下，"><meta name="keywords" content="Spring"><title>在 Spring 中实现组合请求接口 · xqMing</title><link rel="icon" href="/favicon.ico"><link rel="canonical" href="http://yoursite.com/2018/05/29/在Spring中实现组合请求接口/"><link rel="alternate" href="/atom.xml" title="xqMing"><link rel="stylesheet" href="/fonts/iconfont/iconfont.css"><link rel="stylesheet" href="/css/style.css"></head><body><div id="main"><header><a href="/." class="logo">xqMing</a><ul class="nav"><li class="nav-link"><a href="/" target="_self">Home</a></li><li class="nav-link"><a href="/archives/" target="_self">Archives</a></li><li class="nav-link"><a href="/tags/" target="_self">Tags</a></li><li class="nav-link"><a href="/about/" target="_self">About</a></li></ul></header><section id="container"><article class="post"><h1 class="post-title">在 Spring 中实现组合请求接口</h1><span class="post-time">May 29, 2018</span><div id="sidebar" class="post-sidebar"><h3 class="heading">Contents</h3><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用方式"><span class="toc-text">使用方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现原理"><span class="toc-text">实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取请求处理的方法"><span class="toc-text">获取请求处理的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取请求方法所在类"><span class="toc-text">获取请求方法所在类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取请求方法需要的-参数值"><span class="toc-text">获取请求方法需要的 参数值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全性考虑"><span class="toc-text">安全性考虑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#局限性"><span class="toc-text">局限性</span></a></div><div class="post-content"><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><ul>
+<li>App 在启动的时候，会调用服务端多个接口，随着业务迭代开发，请求接口会越来越多，致使 App 在启动的时候会有多次 IO 请求，启动缓慢。</li>
+<li>为解决此问题，App 端同学会要求服务端同学，在一个接口内，返回多种业务数据，或者要求在一个接口，组合响应多个接口数据。在此背景下，组合请求接口因需而生。</li>
+</ul>
+<a id="more"></a>
+<p>将接口合并请求，笔者了解到，有如下解决方案：</p>
+<ul>
+<li><p>使用 API 网关。</p>
+</li>
+<li><p>使用 <a href="https://github.com/facebook/graphql" target="_blank" rel="external">GraphQL</a>。</p>
+</li>
+</ul>
+<p>GraphQL 是Facebook 推出的一种用于应用层的 API 查询语言，它有一套完善的规范，不同语言都有提供对其的支持。不过引入 GraphQL ，需要引入额外的依赖，并且开发团队都要了解 GraphQL 的使用。</p>
+<p>上面介绍的2种方案，都需要引入新的东西，有一定的成本。下面笔者介绍的方案，通过利用 Java 中强大的 <strong>反射机制</strong> ，可以在现有的 Spring 技术栈中，以较为简单的方式，实现组合请求接口，下面的文字里，笔者将介绍它的使用方式，实现原理。</p>
+<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><p>在对应的处理方法上加上 <strong>@EnableCombineRequest</strong> 注解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@EnableCombineRequest</div><div class="line">@GetMapping(path = &quot;/liang&quot;)</div><div class="line">public UserDto getLiang(@RequestParam(name=&quot;userName&quot;,defaultValue = &quot;明&quot;)String  name,Integer id) &#123;</div><div class="line">    log.info(&quot;name:&#123;&#125;,age:&#123;&#125;&quot;,name,id);</div><div class="line">    return new UserDto(id,name);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>请求的 request<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&#123;<span class="attr">"method"</span>:<span class="string">"GET"</span>,<span class="attr">"requestId"</span>:<span class="string">"222"</span>,<span class="attr">"url"</span>:<span class="string">"/fang"</span>&#125;,&#123;<span class="attr">"method"</span>:<span class="string">"GET"</span>,<span class="attr">"requestId"</span>:<span class="string">"111"</span>,<span class="attr">"url"</span>:<span class="string">"/ming"</span>&#125;]</div></pre></td></tr></table></figure></p>
+<p>响应的 response</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&#123;<span class="attr">"requestId"</span>:<span class="string">"222"</span>,<span class="attr">"url"</span>:<span class="string">"/fang"</span>,<span class="attr">"httpStatus"</span>:<span class="number">200</span>,<span class="attr">"entity"</span>:&#123;<span class="attr">"id"</span>:<span class="number">1</span>,<span class="attr">"name"</span>:<span class="string">"芳"</span>&#125;&#125;,&#123;<span class="attr">"requestId"</span>:<span class="string">"111"</span>,<span class="attr">"url"</span>:<span class="string">"/ming"</span>,<span class="attr">"httpStatus"</span>:<span class="number">200</span>,<span class="attr">"entity"</span>:&#123;<span class="attr">"id"</span>:<span class="number">2</span>,<span class="attr">"name"</span>:<span class="string">"明"</span>&#125;&#125;]</div></pre></td></tr></table></figure>
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>实现组合请求，需要客户端同学自己组合请求的 <strong>url</strong> 和 <strong>参数</strong>， 服务端则利用 <strong>ReflectionUtils.invokeMethod(method, object, args);</strong> 方法，来获取单个请求的响应结果，组合响应请求后，统一返回。这其中，要重点了解这里用到的这个反射方法：</p>
+<ul>
+<li><strong>ReflectionUtils</strong> 是 Spring 中提供的工具类；</li>
+<li><strong>method</strong> 是单个请求的实际处理方法；</li>
+<li><strong>object</strong> 参数是处理方法所在的类；</li>
+<li><strong>args</strong> 是方法所需要的参数；</li>
+</ul>
+<p><strong>ReflectionUtils</strong> 方法拿来即用即可，另外方法需要的参数，是需要深入了解 Spring 机制后，根据客户端传入参数获取。</p>
+<h3 id="获取请求处理的方法"><a href="#获取请求处理的方法" class="headerlink" title="获取请求处理的方法"></a>获取请求处理的方法</h3><p>在 Spring MVC 中，一种 url 请求，都有一个 <strong>HandlerMethod</strong> 来处理，通过 <strong>URL+HTTP mthod</strong>，可以获取到一个 <strong>HandlerMethod</strong> 。通过注入 <strong>requestMappingHandlerMapping</strong>，可以获取到 <strong>Map<requestmappinginfo, handlermethod=""></requestmappinginfo,></strong>，<strong>RequestMappingInfo</strong> 中包含了请求 url 和请求方法的信息，通过遍历，可以获取到 <strong>HandlerMethod</strong> 实例。</p>
+<h3 id="获取请求方法所在类"><a href="#获取请求方法所在类" class="headerlink" title="获取请求方法所在类"></a>获取请求方法所在类</h3><p>通过 <strong>ApplicationContext</strong> 的 <strong>getBean</strong> 方法获取，其中 Bean 的名字，可以从 <strong>HandlerMethod</strong> 中获取。</p>
+<h3 id="获取请求方法需要的-参数值"><a href="#获取请求方法需要的-参数值" class="headerlink" title="获取请求方法需要的 参数值"></a>获取请求方法需要的 <strong>参数值</strong></h3><p><strong>参数值</strong> 的来源有三种：</p>
+<blockquote>
+<p>请求的 <strong>url</strong> 上<br>源于客户端传入的 param<br>注解参数的默认值</p>
+</blockquote>
+<p>使用 <strong>DefaultParameterNameDiscoverer</strong> 类，反射获取方法的参数; 通过 <strong>MethodParameter</strong> 类，获取参数中使用到的注解，并进行处理。<br>其中对注解参数的处理，参考了 <strong>org.springframework.web.bind.annotation.support.HandlerMethodInvoker#resolveHandlerArguments</strong> ，<strong>HandlerMethodInvoker</strong> 该类在 <strong>spring-web 5.0</strong> 的版本已经移除。</p>
+<h2 id="安全性考虑"><a href="#安全性考虑" class="headerlink" title="安全性考虑"></a>安全性考虑</h2><p>实际应用场景下，仅有部分接口需要合并请求，因此，如果一个接口要支持组合请求，需要在接口上加上 <strong>EnableCombineRequest</strong> 注解，以避免组合请求接口滥用。</p>
+<h2 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h2><ul>
+<li><p>如果项目中有用到拦截器，并且组合接口中的部分请求，在该拦截链中，需要对组合接口进行特殊的处理，或者将组合接口，也放到该拦截链中。</p>
+</li>
+<li><p>目前仅实现了 <strong>@RequestParam</strong> 和 <strong>@PathVariable</strong> 注解的支持。</p>
+</li>
+</ul>
+</div></article><div class="tags"><a href="/tags/Spring/">Spring</a></div><div class="paginator"><a href="/2018/05/29/Spring-Boot-在贝聊的应用/" class="next"><span>Next</span><i class="iconfont icon-right"></i></a></div><section id="comments"><div data-thread-key="http://yoursite.com/2018/05/29/在Spring中实现组合请求接口/index.html" data-title="在 Spring 中实现组合请求接口" data-url="http://yoursite.com/2018/05/29/在Spring中实现组合请求接口/index.html" class="ds-thread"></div><script type="text/javascript">var duoshuoQuery = {short_name: "xqming" };
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();</script></section></section><footer><div class="copyright"><p class="power">Powered by <a href="https://hexo.io/">Hexo</a> and Theme by <a href="https://github.com/ahonn/hexo-theme-even"> Even</a></p><p class="since">&copy;2018<span class="heart"><i class="iconfont icon-heart"></i></span><span class="author">xqMing</span></p></div><label id="back2top"><i class="iconfont icon-up"></i></label></footer></div><script src="/js/zepto.min.js"></script><script src="/js/theme.js"></script></body></html>
