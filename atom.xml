@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-04T15:18:56.000Z</updated>
+  <updated>2018-06-10T14:23:24.359Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,135 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记一次大厂面</title>
+    <link href="http://yoursite.com/2018/06/10/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%A4%A7%E5%8E%82%E9%9D%A2/"/>
+    <id>http://yoursite.com/2018/06/10/记一次大厂面/</id>
+    <published>2018-06-10T14:10:38.000Z</published>
+    <updated>2018-06-10T14:23:24.359Z</updated>
+    
+    <content type="html"><![CDATA[<p>阿里是我最向往的公司之一，最近在拉勾上投简历，被阿里的技术leader邀请投递简历，并且进行了电话面和视屏面。两轮面试过程中，答出了不少，也有不少被问懵了，学习到了不少。再此对一些问题做一些记录。</p>
+<a id="more"></a>
+<h3 id="ConcurrentHashMap-底层实现，常用方法是怎么保证线程安全的"><a href="#ConcurrentHashMap-底层实现，常用方法是怎么保证线程安全的" class="headerlink" title="ConcurrentHashMap 底层实现，常用方法是怎么保证线程安全的"></a>ConcurrentHashMap 底层实现，常用方法是怎么保证线程安全的</h3><p>底层实现：</p>
+<ul>
+<li>jdk7：ReentrantLock+Segment+HashEntry (使用分段锁技术，细化锁的粒度)</li>
+<li>jdk8：synchronized+CAS+HashEntry+红黑树 </li>
+</ul>
+<p>下面谈谈，JDK 7 中，各个方法是怎么保证线程安全的：</p>
+<ul>
+<li>get()：性能高效，get 的过程不加锁，因为get方法将要使用的共享变量，都使用了 volatile 关键字，保证不会读到过期的值。</li>
+<li>put()：涉及对共享变量的写操作，会加锁，代码里面明确可以看到 <strong>lock();</strong> 和 <strong>unlock</strong>。<strong>Segment</strong> 继承了 <strong>ReentrantLock </strong></li>
+<li>size()：有两种方案，A方案先无锁获取两次，比较值，相等就返回，不相等则采用B方案，通过对所有 <strong>Segment</strong>加锁来统计。</li>
+</ul>
+<p>推荐深入阅读：<a href="https://www.cnblogs.com/study-everyday/p/6430462.html#autoid-2-2-5" target="_blank" rel="external">ConcurrentHashMap 原理分析</a></p>
+<h3 id="Zookeeper-使用的协议"><a href="#Zookeeper-使用的协议" class="headerlink" title="Zookeeper 使用的协议"></a>Zookeeper 使用的协议</h3><p>Zookeeper 使用了一种称为Zookeeper Atomic Broadcat(ZAB，ZooKeeper原子消息广播协议)的协议，作为其数据一致性的核心算法，是Paxos算法的变种，相比Paxos，Zab最大的特点是保证强一致性。</p>
+<p>推荐深入阅读书籍：《从Paxos到ZooKeeper，分布式一致性原理与实践》</p>
+<h3 id="Mysql-两种引擎MyISAM和InnoDB的区别"><a href="#Mysql-两种引擎MyISAM和InnoDB的区别" class="headerlink" title="Mysql 两种引擎MyISAM和InnoDB的区别"></a>Mysql 两种引擎MyISAM和InnoDB的区别</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>InnoDB</th>
+<th>MyISAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>事务处理</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>外键</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>表总行数，不加where</td>
+<td>没有保存</td>
+<td>有保存</td>
+</tr>
+<tr>
+<td>全文索引</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>锁支持情况</td>
+<td>支持到行级锁</td>
+<td>只支持表级锁</td>
+</tr>
+</tbody>
+</table>
+<p>推荐深入阅读：<a href="https://blog.csdn.net/lc0817/article/details/52757194" target="_blank" rel="external">MySQL存储引擎中的MyISAM和InnoDB区别详解</a></p>
+<h3 id="Spring-事物7种传播特性，5种隔离级别"><a href="#Spring-事物7种传播特性，5种隔离级别" class="headerlink" title="Spring 事物7种传播特性，5种隔离级别"></a>Spring 事物7种传播特性，5种隔离级别</h3><p>7种传播特性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1、PROPAGATION_REQUIRED 支持当前事务，如果不存在 就新建一个(默认) </div><div class="line">2、PROPAGATION_SUPPORTS 支持当前事务，如果不存在，就不使用事务 </div><div class="line">3、PROPAGATION_MANDATORY 支持当前事务，如果不存在，抛出异常 </div><div class="line">4、PROPAGATION_REQUIRES_NEW 如果有事务存在，挂起当前事务，创建一个新的事务 </div><div class="line">5、PROPAGATION_NOT_SUPPORTED 以非事务方式运行，如果有事务存在，挂起当前事务 </div><div class="line">6、PROPAGATION_NEVER 以非事务方式运行，如果有事务存在，抛出异常 </div><div class="line">7、PROPAGATION_NESTED 如果当前事务存在，则嵌套事务执行</div></pre></td></tr></table></figure></p>
+<p>5种隔离级别<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1、Serializable ：最严格的级别，事务串行执行，资源消耗最大；</div><div class="line">2、REPEATABLE READ ：保证了一个事务不会修改已经由另一个事务读取但未提交（回滚）的数据。避免了&quot;脏读取&quot;和&quot;不可重复读取&quot;的情况，但是带来了更多的性能损失</div><div class="line">3、READ COMMITTED :大多数主流数据库的默认事务等级，保证了一个事务不会读到另一个并行事务已修改但未提交的数据，避免了&quot;脏读取&quot;。该级别适用于大多数系统。</div><div class="line">4、Read Uncommitted ：保证了读取过程中不会读取到非法数据。</div></pre></td></tr></table></figure></p>
+<h3 id="并行框架-Fork-Join-使用"><a href="#并行框架-Fork-Join-使用" class="headerlink" title="并行框架 Fork/Join 使用"></a>并行框架 Fork/Join 使用</h3><p>Fork/Join 框架是 Java7 提供的一个用于并行执行任务的框架，是一个把任务分割成若干小任务，并最终汇总小任务结果后得到大任务结果的框架。</p>
+<p>使用的算法：<strong>窃取算法</strong>，即<strong>把某个线程从其它队列里窃取来执行</strong>。这样可以充分利用线程进行并行计算，<strong>减少线程竞争时间</strong>。</p>
+<p>涉及到的核心类：<br><strong>RecursiveTask</strong>：ForkJoinTask 子类，用于有返回结果的任务。<br><strong>RecursiveAction</strong>：ForkJoinTask 子类，用于有返回结果的任务。<br><strong>ForkJoinPool</strong>：所有的 ForkJoinTask 都需要通过ForkJoinPool来执行。</p>
+<h3 id="Happern-before-六原则"><a href="#Happern-before-六原则" class="headerlink" title="Happern before 六原则"></a>Happern before 六原则</h3><ul>
+<li><strong>程序顺序规则：</strong> 一个线程中的每个操作，happens-before于随后该线程中的任意后续操作</li>
+<li><strong>监视器锁规则：</strong> 对一个锁的解锁，happens-before于随后对这个锁的获取</li>
+<li><strong>volatile变量规则：</strong> 对一个volatile域的写，happens-before于对这个变量的读</li>
+<li><strong>传递性：</strong> 如果A happens-before B，B happens-before C，那么A happens-before C</li>
+<li><strong>start规则：</strong> 如果线程A执行线程B的start方法，那么线程A的ThreadB.start()happens-before于线程B的任意操作</li>
+<li><strong>join规则：</strong> Z如果线程A执行线程B的join方法，那么线程B的任意操作happens-before于线程A从TreadB.join()方法成功返回。</li>
+</ul>
+<h3 id="四种GC-Root"><a href="#四种GC-Root" class="headerlink" title="四种GC Root"></a>四种GC Root</h3><p>主要分布在栈和方法区这两个地方</p>
+<ul>
+<li>虚拟机栈中的引用对象</li>
+<li>本地方法栈中JNI引用对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区中常量引用对象</li>
+</ul>
+<h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3><p>一个类的加载器，收到类加载的请求时，先不会自己尝试加载这个类，而是委托给父类加载器，每层的类加载器都如此，只有当父类无法加载该类，才让子类自己加载。</p>
+<p>优点：类与类加载器，一起具备了一种<strong>带有优先级的层次关系</strong>，方便了维护管理。<br>破坏双亲委派的例子：<strong>JNDI 服务调用</strong>；<strong>OSGI</strong>；<strong>代码热部署</strong>。</p>
+<h3 id="线程池连环炮"><a href="#线程池连环炮" class="headerlink" title="线程池连环炮"></a>线程池连环炮</h3><p>先问线程池 ThreadPoolExecutor 的参数，由此引发线程池大小，任务队列，饱和策略等系列问题。</p>
+<h4 id="如何确定线程池的大小？"><a href="#如何确定线程池的大小？" class="headerlink" title="如何确定线程池的大小？"></a>如何确定线程池的大小？</h4><p>一种简单的计算方式，假设CPU 为N：</p>
+<ul>
+<li>如果是CPU密集型，建议为N + 1</li>
+<li>如果是计算密集型，建议为2N + 1</li>
+</ul>
+<p>推荐深入阅读：<a href="http://ifeve.com/how-to-calculate-threadpool-size/" target="_blank" rel="external">如何合理地估算线程池大小？</a></p>
+<h4 id="可以选择哪几个任务队列？"><a href="#可以选择哪几个任务队列？" class="headerlink" title="可以选择哪几个任务队列？"></a>可以选择哪几个任务队列？</h4><ul>
+<li>ArrayBlockingQueue：基于数据的有界阻塞队列，按FIFO 原则排序。</li>
+<li>LinkedBlockingQueue：基于链表的阻塞队列，按FIFO 原则排序，<strong>吞吐量要高于ArrayBlockingQueue</strong>。</li>
+<li>SynchronousQueue：不存储元素的阻塞队列。静态工厂方法 *Executors.</li>
+<li>PriorityBlockingQueue：一个具有优先级的无限阻塞队列。</li>
+</ul>
+<h4 id="了解饱和策略？什么时候促发该策略，有哪几种？"><a href="#了解饱和策略？什么时候促发该策略，有哪几种？" class="headerlink" title="了解饱和策略？什么时候促发该策略，有哪几种？"></a>了解饱和策略？什么时候促发该策略，有哪几种？</h4><p><strong>促发条件：</strong>当核心线程池满（corePoolSize），任务会放到队列里。当队列也满了，会判断线程数是否小于最大的线程池配置数（maximumPoolSize）。如果小于，则继续新建线程，如果已经达到最大值，促发饱和策略。</p>
+<p><strong>策略类型：</strong></p>
+<ul>
+<li>AborPolicy：默认策略，抛出异常</li>
+<li>CallerRUnsPolicy：用调用者所在线程来运行任务。</li>
+<li>DiscardOldestPolicy：丢弃队列里的最近一个任务，并执行当前任务。</li>
+<li>DiscardPolicy：不处理，丢失掉。</li>
+<li>自定义的拒绝策略，比如记录日志，或者持久化不能处理的任务</li>
+</ul>
+<h3 id="Dubbo-超时机制"><a href="#Dubbo-超时机制" class="headerlink" title="Dubbo 超时机制"></a>Dubbo 超时机制</h3><p>Dubbo 底层使用了Netty 通信。消费端发起远程请求后，线程不会阻塞等待服务端的返回，而是马上得到一个ResponseFuture，消费端通过不断的轮询机制判断结果是否有返回。因为是通过轮询，轮询有个需要特别注要的就是<strong>避免死循环</strong>，所以为了解决这个问题就<strong>引入了超时机制</strong>，只在一定时间范围内做轮询，如果超时时间就返回超时异常。更多详情可以看 <strong>DefaultFuture</strong> 类的</p>
+<p>推荐深入阅读：<br><a href="https://www.cnblogs.com/ASPNET2008/p/7292472.html" target="_blank" rel="external">dubbo源码分析（二）：超时原理以及应用场景</a><br><a href="https://blog.csdn.net/paul_wei2008/article/details/19355681" target="_blank" rel="external">Dubbo基本原理机制</a></p>
+<h3 id="Spring的BeanFactoryPostProcessor和BeanPostProcessor-区别"><a href="#Spring的BeanFactoryPostProcessor和BeanPostProcessor-区别" class="headerlink" title="Spring的BeanFactoryPostProcessor和BeanPostProcessor 区别"></a>Spring的BeanFactoryPostProcessor和BeanPostProcessor 区别</h3><p><strong>PostProcessor</strong>：后处理器；<br><strong>BeanPostProcessor</strong>：Bean的后置处理器（处理的对象是Bean）；该接口有两个方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//bean对象实例化前执行的操作</div><div class="line">Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException;</div><div class="line">//bean对象实例化执行的操作</div><div class="line">Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException;</div></pre></td></tr></table></figure></p>
+<p>这个接口的处理，是<strong>发生在Spring容器的实例化和依赖注入完成之后</strong>。<br>默认是会对整个Spring容器中所有的bean进行处理，可以通过方法中的参数，对指定的bena进行处理。</p>
+<p><strong>BeanFactoryPostProcessor</strong>：BeanFactory的后置处理器（处理的对象是BeanFactory）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException;</div></pre></td></tr></table></figure></p>
+<p>该接口的调用时间是，Spring 容器<strong>刚完成BeanDefinition的解析，尚未实例化bean</strong>。可以<strong>用于修改bean的定义属性</strong>。</p>
+<p>相同点：二者都是spring初始化bean时对外暴露的扩展点接口。<br>不同点：</p>
+<ul>
+<li>二者的处理时间不同.</li>
+<li>方法不同，作用不同。</li>
+</ul>
+<p>推荐深入阅读：<a href="https://blog.csdn.net/caihaijiang/article/details/35552859" target="_blank" rel="external">Spring的BeanFactoryPostProcessor和BeanPostProcessor</a></p>
+<p>TODO<br>未完待续</p>
+<p>TODO<br>未完待续</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;阿里是我最向往的公司之一，最近在拉勾上投简历，被阿里的技术leader邀请投递简历，并且进行了电话面和视屏面。两轮面试过程中，答出了不少，也有不少被问懵了，学习到了不少。再此对一些问题做一些记录。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>在 Spring 中实现组合请求接口</title>

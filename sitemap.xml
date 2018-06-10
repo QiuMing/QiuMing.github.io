@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/06/10/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%A4%A7%E5%8E%82%E9%9D%A2/</loc>
+    
+    <lastmod>2018-06-10T14:23:24.359Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/10/10/Git-%E5%B8%B8%E8%A7%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E5%8F%8A%E5%91%BD%E4%BB%A4/</loc>
     
     <lastmod>2018-06-04T15:20:40.000Z</lastmod>
@@ -23,7 +30,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2016/01/27/Vim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
+    <loc>http://yoursite.com/2016/01/27/Hexo%E5%B0%8F%E8%AE%A1/</loc>
     
     <lastmod>2017-02-13T07:12:55.389Z</lastmod>
     
@@ -37,7 +44,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2016/01/27/Hexo%E5%B0%8F%E8%AE%A1/</loc>
+    <loc>http://yoursite.com/2016/01/27/Vim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
     
     <lastmod>2017-02-13T07:12:55.389Z</lastmod>
     
