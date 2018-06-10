@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-10T14:23:24.359Z</updated>
+  <updated>2018-06-10T14:29:42.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2018/06/10/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%A4%A7%E5%8E%82%E9%9D%A2/"/>
     <id>http://yoursite.com/2018/06/10/记一次大厂面/</id>
     <published>2018-06-10T14:10:38.000Z</published>
-    <updated>2018-06-10T14:23:24.359Z</updated>
+    <updated>2018-06-10T14:29:42.000Z</updated>
     
     <content type="html"><![CDATA[<p>阿里是我最向往的公司之一，最近在拉勾上投简历，被阿里的技术leader邀请投递简历，并且进行了电话面和视屏面。两轮面试过程中，答出了不少，也有不少被问懵了，学习到了不少。再此对一些问题做一些记录。</p>
 <a id="more"></a>
@@ -131,7 +131,6 @@
 <li>方法不同，作用不同。</li>
 </ul>
 <p>推荐深入阅读：<a href="https://blog.csdn.net/caihaijiang/article/details/35552859" target="_blank" rel="external">Spring的BeanFactoryPostProcessor和BeanPostProcessor</a></p>
-<p>TODO<br>未完待续</p>
 <p>TODO<br>未完待续</p>
 ]]></content>
     
@@ -1078,6 +1077,38 @@ public interface Comparator&lt;T&gt; { int compare(T o1, T o2); boolean equals(O
   </entry>
   
   <entry>
+    <title>Hexo小计</title>
+    <link href="http://yoursite.com/2016/01/27/Hexo%E5%B0%8F%E8%AE%A1/"/>
+    <id>http://yoursite.com/2016/01/27/Hexo小计/</id>
+    <published>2016-01-27T04:56:29.000Z</published>
+    <updated>2017-02-13T07:12:55.389Z</updated>
+    
+    <content type="html"><![CDATA[<p>因为选择了技术这条路，也选择了通过 Hexo 来写博客，所以，这篇小记，用来记录笔者在使用 Hexo 的常用命令，以及遇到的一些问题。</p>
+<a id="more"></a>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;postName&quot; 		#新建文章</div><div class="line">hexo new page &quot;pageName&quot;	#新建页面</div><div class="line">hexo generate		#生成静态页面至public目录</div><div class="line">hexo server		#开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）</div><div class="line">hexo deploy		#将.deploy目录部署到GitHub</div><div class="line">hexo help 		#查看帮助</div><div class="line">hexo version		#查看Hexo的版本</div><div class="line">hexo deploy -g 		#生成加部署</div><div class="line">hexo server -g		#生成加预览</div></pre></td></tr></table></figure>
+<h2 id="命令的简写"><a href="#命令的简写" class="headerlink" title="命令的简写"></a>命令的简写</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo n == hexo new</div><div class="line">hexo g == hexo generate</div><div class="line">hexo s == hexo server</div><div class="line">hexo d == hexo deploy</div></pre></td></tr></table></figure>
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><ul>
+<li>下载主题放到 themes 文件夹中，在 _config.ym 中修改 theme 的名字</li>
+</ul>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><ul>
+<li>ERROR Deployer not found: git 或者 ERROR Deployer not found: github</li>
+<li>解决方法： npm install hexo-deployer-git –save </li>
+<li>deploy 里面的 type 值为 git</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;因为选择了技术这条路，也选择了通过 Hexo 来写博客，所以，这篇小记，用来记录笔者在使用 Hexo 的常用命令，以及遇到的一些问题。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="博客 Hexo" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2-Hexo/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Vim常用快捷键</title>
     <link href="http://yoursite.com/2016/01/27/Vim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     <id>http://yoursite.com/2016/01/27/Vim常用快捷键/</id>
@@ -1507,38 +1538,6 @@ public interface Comparator&lt;T&gt; { int compare(T o1, T o2); boolean equals(O
     
     
       <category term="Vim" scheme="http://yoursite.com/tags/Vim/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo小计</title>
-    <link href="http://yoursite.com/2016/01/27/Hexo%E5%B0%8F%E8%AE%A1/"/>
-    <id>http://yoursite.com/2016/01/27/Hexo小计/</id>
-    <published>2016-01-27T04:56:29.000Z</published>
-    <updated>2017-02-13T07:12:55.389Z</updated>
-    
-    <content type="html"><![CDATA[<p>因为选择了技术这条路，也选择了通过 Hexo 来写博客，所以，这篇小记，用来记录笔者在使用 Hexo 的常用命令，以及遇到的一些问题。</p>
-<a id="more"></a>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;postName&quot; 		#新建文章</div><div class="line">hexo new page &quot;pageName&quot;	#新建页面</div><div class="line">hexo generate		#生成静态页面至public目录</div><div class="line">hexo server		#开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）</div><div class="line">hexo deploy		#将.deploy目录部署到GitHub</div><div class="line">hexo help 		#查看帮助</div><div class="line">hexo version		#查看Hexo的版本</div><div class="line">hexo deploy -g 		#生成加部署</div><div class="line">hexo server -g		#生成加预览</div></pre></td></tr></table></figure>
-<h2 id="命令的简写"><a href="#命令的简写" class="headerlink" title="命令的简写"></a>命令的简写</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo n == hexo new</div><div class="line">hexo g == hexo generate</div><div class="line">hexo s == hexo server</div><div class="line">hexo d == hexo deploy</div></pre></td></tr></table></figure>
-<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><ul>
-<li>下载主题放到 themes 文件夹中，在 _config.ym 中修改 theme 的名字</li>
-</ul>
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><ul>
-<li>ERROR Deployer not found: git 或者 ERROR Deployer not found: github</li>
-<li>解决方法： npm install hexo-deployer-git –save </li>
-<li>deploy 里面的 type 值为 git</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;因为选择了技术这条路，也选择了通过 Hexo 来写博客，所以，这篇小记，用来记录笔者在使用 Hexo 的常用命令，以及遇到的一些问题。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="博客 Hexo" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2-Hexo/"/>
     
   </entry>
   
